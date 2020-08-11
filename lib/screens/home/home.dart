@@ -1,3 +1,4 @@
+import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/screens/home/image_carusel.dart';
 import 'package:alainclass/screens/sell_car.dart';
 import 'package:alainclass/shared/car_card.dart';
@@ -5,6 +6,7 @@ import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:alainclass/shared/news_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,9 +14,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<HomeBloc>(context).add(HomeRequested());
+  }
+
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   List data = ['item1', 'item2'];
   bool showDesc = true;
+
   Widget new_arrivals = Column(
     children: <Widget>[
       CarCard(
