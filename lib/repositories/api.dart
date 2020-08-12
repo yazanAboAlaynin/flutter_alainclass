@@ -30,4 +30,40 @@ class Api {
 
     return list;
   }
+
+  Future<List> getSearchList() async {
+    final url = '$baseUrl/api/searchlist.php';
+    final response = await this.httpClient.get(url);
+    if (response.statusCode != 200) {
+      throw Exception('error');
+    }
+    final result1 = jsonDecode(response.body);
+    final search_list = result1 as List;
+
+    return search_list;
+  }
+
+  Future<List<Car>> search(brand, year, neworused) async {
+    final url = '$baseUrl/api/searchresult.php';
+    Map<String, String> data = {
+      "brand": brand,
+      "year": year,
+      "neworused": neworused
+    };
+    final response = await this
+        .httpClient
+        .post(url, body: jsonEncode(data), headers: _setHeaders());
+    if (response.statusCode != 200) {
+      throw Exception('error');
+    }
+    final result = jsonDecode(response.body) as List;
+    final List<Car> cars = result.map((dynamic i) => Car.fromJson(i)).toList();
+
+    return cars;
+  }
+
+  Map<String, String> _setHeaders() => {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      };
 }

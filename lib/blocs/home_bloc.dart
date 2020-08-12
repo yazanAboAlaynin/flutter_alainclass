@@ -21,12 +21,22 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         final List<Car> new_arrivals = home_page[0];
         final List sliders = home_page[1];
+        final List search_list = home_page[2];
         //print(slider_images);
         yield HomeLoadSuccess(
-            new_arrivals: new_arrivals, slider_images: sliders);
+            new_arrivals: new_arrivals,
+            slider_images: sliders,
+            search_list: search_list);
       } catch (_) {
         yield HomeLoadFailure();
       }
+    } else if (event is SearchRequested) {
+      yield HomeLoadInProgress();
+      try {
+        final List<Car> cars = await homeRepository.search(
+            event.brand, event.year, event.neworused);
+        yield SearchLoadSuccess(cars: cars);
+      } catch (_) {}
     }
   }
 }

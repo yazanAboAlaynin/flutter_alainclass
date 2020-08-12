@@ -12,3 +12,14 @@ class HomeRequested extends HomeEvent {
   @override
   List<Object> get props => [];
 }
+
+class SearchRequested extends HomeEvent {
+  final String brand;
+  final String neworused;
+  final String year;
+
+  SearchRequested({this.brand, this.neworused, this.year});
+
+  @override
+  List<Object> get props => [];
+}

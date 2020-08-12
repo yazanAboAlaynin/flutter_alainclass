@@ -10,30 +10,17 @@ import 'package:http/http.dart' as http;
 
 void main() {
   Bloc.observer = SimpleBlocObserver();
-  final HomeRepository homeRepository = HomeRepository(
-    api: Api(
-      httpClient: http.Client(),
-    ),
-  );
-  runApp(AlainClass(homeRepository: homeRepository));
+
+  runApp(AlainClass());
 }
 
 class AlainClass extends StatelessWidget {
-  final HomeRepository homeRepository;
-  AlainClass({Key key, @required this.homeRepository})
-      : assert(homeRepository != null),
-        super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'AlainClass',
-      home: BlocProvider(
-          create: (context) => HomeBloc(homeRepository: homeRepository),
-          child: ButterFlyAssetVideo(
-            homeRepository: homeRepository,
-          )),
+      home: AssetVideo(),
     );
   }
 }

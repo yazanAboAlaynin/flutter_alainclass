@@ -6,15 +6,12 @@ import 'package:video_player/video_player.dart';
 
 import 'home/home.dart';
 
-class ButterFlyAssetVideo extends StatefulWidget {
-  final HomeRepository homeRepository;
-
-  const ButterFlyAssetVideo({Key key, this.homeRepository}) : super(key: key);
+class AssetVideo extends StatefulWidget {
   @override
-  ButterFlyAssetVideoState createState() => ButterFlyAssetVideoState();
+  AssetVideoState createState() => AssetVideoState();
 }
 
-class ButterFlyAssetVideoState extends State<ButterFlyAssetVideo> {
+class AssetVideoState extends State<AssetVideo> {
   VideoPlayerController _controller;
 
   @override
@@ -53,10 +50,7 @@ class ButterFlyAssetVideoState extends State<ButterFlyAssetVideo> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (context) => BlocProvider(
-                create: (context) =>
-                    HomeBloc(homeRepository: widget.homeRepository),
-                child: Home()),
+            builder: (context) => Home(),
           ));
     }
   }
