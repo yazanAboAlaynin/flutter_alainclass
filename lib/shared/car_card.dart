@@ -1,14 +1,29 @@
+import 'package:alainclass/models/models.dart';
 import 'package:alainclass/screens/view_car/view_car.dart';
 import 'package:flutter/material.dart';
 
-class CarCard extends StatefulWidget {
-  String image;
-  CarCard({this.image});
-  @override
-  _CarCardState createState() => _CarCardState();
-}
+class CarCard extends StatelessWidget {
+  Car car;
+  CarCard({this.car});
 
-class _CarCardState extends State<CarCard> {
+  Widget getType(type) {
+    if (type == "New") {
+      return Text(
+        'New',
+        style: TextStyle(
+          color: Colors.red,
+        ),
+      );
+    } else {
+      return Text(
+        'Used',
+        style: TextStyle(
+          color: Colors.grey,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -30,8 +45,8 @@ class _CarCardState extends State<CarCard> {
                 Container(
                   height: sizeAware.height * 0.34,
                   width: sizeAware.width,
-                  child: Image.asset(
-                    widget.image,
+                  child: Image.network(
+                    'https://www.alainclass.com/' + car.image,
                     fit: BoxFit.cover,
                     width: sizeAware.width,
                   ),
@@ -39,22 +54,17 @@ class _CarCardState extends State<CarCard> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    'Ferrari 488 Pista',
+                    car.title,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
-                    overflow: TextOverflow.ellipsis,
+                    overflow: TextOverflow.visible,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 4.0),
-                  child: Text(
-                    'New',
-                    style: TextStyle(
-                      color: Colors.red,
-                    ),
-                  ),
+                  child: getType(car.type),
                 ),
               ],
             ),

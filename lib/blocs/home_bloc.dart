@@ -17,8 +17,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (event is HomeRequested) {
       yield HomeLoadInProgress();
       try {
-        final List<Car> new_arrivals = await homeRepository.getNewArrivals();
-        yield HomeLoadSuccess(new_arrivals: new_arrivals);
+        final List home_page = await homeRepository.getHomePage();
+
+        final List<Car> new_arrivals = home_page[0];
+        final List sliders = home_page[1];
+        //print(slider_images);
+        yield HomeLoadSuccess(
+            new_arrivals: new_arrivals, slider_images: sliders);
       } catch (_) {
         yield HomeLoadFailure();
       }

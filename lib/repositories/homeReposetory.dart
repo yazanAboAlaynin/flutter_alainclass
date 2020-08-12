@@ -10,8 +10,8 @@ class HomeRepository {
 
   HomeRepository({@required this.api}) : assert(api != null);
 
-  Future<List<Car>> getNewArrivals() async {
-    final List<Car> cars = await api.getNewArrivals();
-    return cars;
+  Future<List> getHomePage() async {
+    final List home_page = await api.getHomePage();
+    return home_page;
   }
 }

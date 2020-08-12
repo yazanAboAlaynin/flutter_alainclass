@@ -31,7 +31,9 @@ class AlainClass extends StatelessWidget {
       title: 'AlainClass',
       home: BlocProvider(
           create: (context) => HomeBloc(homeRepository: homeRepository),
-          child: ButterFlyAssetVideo()),
+          child: ButterFlyAssetVideo(
+            homeRepository: homeRepository,
+          )),
     );
   }
 }

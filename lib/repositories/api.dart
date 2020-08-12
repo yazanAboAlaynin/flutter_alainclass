@@ -12,14 +12,22 @@ class Api {
     @required this.httpClient,
   }) : assert(httpClient != null);
 
-  Future<List<Car>> getNewArrivals() async {
+  Future<List> getHomePage() async {
     final url = '$baseUrl/api/home-page.php';
     final response = await this.httpClient.get(url);
     if (response.statusCode != 200) {
       throw Exception('error');
     }
-    final result = jsonDecode(response.body)['new_arrivals'] as List;
-    final List<Car> cars = result.map((dynamic i) => Car.fromJson(i)).toList();
-    return cars;
+    List list = [];
+    final result1 = jsonDecode(response.body) as Map;
+    final new_arrivals = result1['new_arrivals'] as List;
+    final slider_images = result1['HomePageImages'] as List;
+    final List<Car> cars =
+        new_arrivals.map((dynamic i) => Car.fromJson(i)).toList();
+
+    list.add(cars);
+    list.add(slider_images);
+
+    return list;
   }
 }

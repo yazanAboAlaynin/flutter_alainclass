@@ -1,23 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
-class ImageCarusel extends StatefulWidget {
-  @override
-  _ImageCaruselState createState() => _ImageCaruselState();
-}
+class ImageCarusel extends StatelessWidget {
+  final List images;
 
-class _ImageCaruselState extends State<ImageCarusel> {
+  const ImageCarusel({Key key, this.images}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    List<NetworkImage> list = [];
+    for (int i = 0; i < images.length; i++) {
+      list.add(
+        NetworkImage('https://www.alainclass.com/' + images[i]),
+      );
+    }
     return Carousel(
       boxFit: BoxFit.contain,
-      images: <AssetImage>[
-        AssetImage('assets/images/cover3.jpg'),
-        AssetImage('assets/images/cover4.jpg'),
-        AssetImage('assets/images/cover1.jpg'),
-        AssetImage('assets/images/cover2.jpg'),
-        AssetImage('assets/images/cover5.jpg'),
-      ],
+      images: list,
       autoplay: true,
       animationCurve: Curves.fastOutSlowIn,
       autoplayDuration: Duration(
