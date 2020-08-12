@@ -1,6 +1,9 @@
+import 'package:alainclass/repositories/api.dart';
 import 'package:alainclass/screens/home/home.dart';
+import 'package:alainclass/screens/search_screen.dart';
 import 'package:alainclass/screens/sell_car.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class MyDrawer extends StatefulWidget {
   @override
@@ -9,9 +12,76 @@ class MyDrawer extends StatefulWidget {
 
 class _MyDrawerState extends State<MyDrawer> {
   bool showSrch = true;
+  String brand = "";
+  String year = "";
+  String neworused = "";
+  List search_list = [];
+  Api api = Api(
+    httpClient: http.Client(),
+  );
+  Future getSearchList() async {
+    List list = await api.getSearchList();
+    setState(() {
+      search_list = list;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getSearchList();
+  }
+
+  List getDropDownItems(myList, name) {
+    List<DropdownMenuItem<String>> list = [];
+    list.add(
+      DropdownMenuItem<String>(
+        value: "",
+        child: Text(
+          name,
+        ),
+      ),
+    );
+    myList.forEach((key, value) {
+      list.add(
+        DropdownMenuItem<String>(
+          value: key,
+          child: Text(
+            value,
+          ),
+        ),
+      );
+    });
+    return list;
+  }
+
+  List getYearItems(List myList) {
+    List<DropdownMenuItem<String>> list = [];
+    list.add(
+      DropdownMenuItem<String>(
+        value: "",
+        child: Text(
+          "Year",
+        ),
+      ),
+    );
+    for (int i = 0; i < myList.length; i++) {
+      list.add(
+        DropdownMenuItem<String>(
+          value: myList[i],
+          child: Text(
+            myList[i],
+          ),
+        ),
+      );
+    }
+    return list;
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -242,23 +312,17 @@ class _MyDrawerState extends State<MyDrawer> {
                               isExpanded: true,
                               iconDisabledColor: Colors.white,
                               iconEnabledColor: Colors.white,
+                              style: TextStyle(color: Colors.white),
+                              dropdownColor: Colors.grey[800],
                               underline: SizedBox(),
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: "1",
-                                  child: Text(
-                                    "First",
-                                  ),
-                                ),
-                                DropdownMenuItem<String>(
-                                  value: "2",
-                                  child: Text(
-                                    "Second",
-                                  ),
-                                ),
-                              ],
+                              items: search_list.length == 0
+                                  ? []
+                                  : getDropDownItems(search_list[0], "Make"),
+                              value: brand == "" ? null : "$brand",
                               onChanged: (value) {
-                                print("value: $value");
+                                setState(() {
+                                  brand = value;
+                                });
                               },
                               hint: Text(
                                 "Make",
@@ -286,23 +350,17 @@ class _MyDrawerState extends State<MyDrawer> {
                               isExpanded: true,
                               iconDisabledColor: Colors.white,
                               iconEnabledColor: Colors.white,
+                              style: TextStyle(color: Colors.white),
+                              dropdownColor: Colors.grey[800],
                               underline: SizedBox(),
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: "1",
-                                  child: Text(
-                                    "First",
-                                  ),
-                                ),
-                                DropdownMenuItem<String>(
-                                  value: "2",
-                                  child: Text(
-                                    "Second",
-                                  ),
-                                ),
-                              ],
+                              items: search_list.length == 0
+                                  ? []
+                                  : getDropDownItems(search_list[1], "All"),
+                              value: neworused == "" ? null : "$neworused",
                               onChanged: (value) {
-                                print("value: $value");
+                                setState(() {
+                                  neworused = value;
+                                });
                               },
                               hint: Text(
                                 "All",
@@ -330,23 +388,17 @@ class _MyDrawerState extends State<MyDrawer> {
                               isExpanded: true,
                               iconDisabledColor: Colors.white,
                               iconEnabledColor: Colors.white,
+                              style: TextStyle(color: Colors.white),
+                              dropdownColor: Colors.grey[800],
                               underline: SizedBox(),
-                              items: [
-                                DropdownMenuItem<String>(
-                                  value: "1",
-                                  child: Text(
-                                    "First",
-                                  ),
-                                ),
-                                DropdownMenuItem<String>(
-                                  value: "2",
-                                  child: Text(
-                                    "Second",
-                                  ),
-                                ),
-                              ],
+                              items: search_list.length == 0
+                                  ? []
+                                  : getYearItems(search_list[2]),
+                              value: year == "" ? null : "$year",
                               onChanged: (value) {
-                                print("value: $value");
+                                setState(() {
+                                  year = value;
+                                });
                               },
                               hint: Text(
                                 "Year",
@@ -363,9 +415,11 @@ class _MyDrawerState extends State<MyDrawer> {
                         child: MaterialButton(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SellCar()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SearchScreen(),
+                              ),
+                            );
                           },
                           height: sizeAware.height * 0.07,
                           minWidth: sizeAware.width,
@@ -381,12 +435,12 @@ class _MyDrawerState extends State<MyDrawer> {
                           splashColor: Colors.redAccent,
                         ),
                       ),
-                      SizedBox(
-                        height: sizeAware.height * 0.02,
-                      ),
                     ],
                   ),
                 ),
+              ),
+              SizedBox(
+                height: sizeAware.height * 0.02,
               ),
             ],
           ),
