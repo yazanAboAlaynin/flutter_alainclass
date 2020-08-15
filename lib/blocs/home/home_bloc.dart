@@ -3,7 +3,7 @@ import 'package:alainclass/repositories/repositories.dart';
 import 'package:meta/meta.dart';
 import 'package:bloc/bloc.dart';
 
-import 'blocs.dart';
+import '../blocs.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final HomeRepository homeRepository;

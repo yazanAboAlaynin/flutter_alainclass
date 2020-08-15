@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:meta/meta.dart';
 
-import 'package:alainclass/repositories/api.dart';
+import 'package:alainclass/repositories/home/api.dart';
 import 'package:alainclass/models/models.dart';
 
 class HomeRepository {

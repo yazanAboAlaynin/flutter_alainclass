@@ -13,23 +13,14 @@ final List<String> imgList = [
   'assets/images/cover7.jpg',
 ];
 
-class ManuallyControlledSlider extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _ManuallyControlledSliderState();
-  }
-}
+class ManuallyControlledSlider extends StatelessWidget {
+  final List images;
 
-class _ManuallyControlledSliderState extends State<ManuallyControlledSlider> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  const ManuallyControlledSlider({Key key, this.images}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
-    final List<Widget> imageSliders = imgList
+    final List<Widget> imageSliders = images
         .map((item) => InkWell(
               onTap: () {
                 Navigator.push(
@@ -41,8 +32,8 @@ class _ManuallyControlledSliderState extends State<ManuallyControlledSlider> {
                 margin: EdgeInsets.all(4.0),
                 child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Image.asset(
-                      item,
+                    child: Image.network(
+                      'https://www.alainclass.com/' + item,
                       fit: BoxFit.cover,
                       width: sizeAware.width,
                       height: sizeAware.height,

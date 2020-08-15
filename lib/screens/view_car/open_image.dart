@@ -19,7 +19,8 @@ class _OpenImageState extends State<OpenImage> {
       ),
       body: Center(
         child: PhotoView(
-          imageProvider: AssetImage(widget.image),
+          imageProvider:
+              NetworkImage('https://www.alainclass.com/' + widget.image),
         ),
       ),
     );

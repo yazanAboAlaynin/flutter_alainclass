@@ -1,4 +1,4 @@
-import 'package:alainclass/repositories/api.dart';
+import 'package:alainclass/repositories/home/api.dart';
 import 'package:alainclass/screens/home/home.dart';
 import 'package:alainclass/screens/search_screen.dart';
 import 'package:alainclass/screens/sell_car.dart';
@@ -20,10 +20,12 @@ class _MyDrawerState extends State<MyDrawer> {
     httpClient: http.Client(),
   );
   Future getSearchList() async {
-    List list = await api.getSearchList();
-    setState(() {
-      search_list = list;
-    });
+    try {
+      List list = await api.getSearchList();
+      setState(() {
+        search_list = list;
+      });
+    } catch (e) {}
   }
 
   @override
@@ -417,7 +419,11 @@ class _MyDrawerState extends State<MyDrawer> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => SearchScreen(),
+                                builder: (context) => SearchScreen(
+                                  brand: brand,
+                                  neworused: neworused,
+                                  year: year,
+                                ),
                               ),
                             );
                           },

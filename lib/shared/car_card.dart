@@ -32,10 +32,13 @@ class CarCard extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ViewCar()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ViewCar(
+                        car: car,
+                      )));
         },
         child: Container(
-          //height: sizeAware.height * 0.44,
           child: Card(
             clipBehavior: Clip.antiAliasWithSaveLayer,
             color: Colors.black,
