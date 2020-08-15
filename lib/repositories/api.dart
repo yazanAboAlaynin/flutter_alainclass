@@ -19,11 +19,11 @@ class Api {
       throw Exception('error');
     }
     List list = [];
-    final result1 = jsonDecode(response.body) as Map;
-    final new_arrivals = result1['new_arrivals'] as List;
-    final slider_images = result1['HomePageImages'] as List;
+    final result1 = jsonDecode(response.body) as Map ?? Map();
+    final new_arrivals = result1['new_arrivals'] as List ?? [];
+    final slider_images = result1['HomePageImages'] as List ?? [];
     final List<Car> cars =
-        new_arrivals.map((dynamic i) => Car.fromJson(i)).toList();
+        new_arrivals.map((dynamic i) => Car.fromJson(i)).toList() ?? [];
 
     list.add(cars);
     list.add(slider_images);
@@ -37,8 +37,8 @@ class Api {
     if (response.statusCode != 200) {
       throw Exception('error');
     }
-    final result1 = jsonDecode(response.body);
-    final search_list = result1 as List;
+    final result1 = jsonDecode(response.body) ?? [];
+    final search_list = result1 as List ?? [];
 
     return search_list;
   }
