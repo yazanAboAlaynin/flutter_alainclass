@@ -1,4 +1,4 @@
-import 'package:alainclass/screens/latest_news.dart';
+import 'package:alainclass/screens/news/view_news.dart';
 import 'package:flutter/material.dart';
 
 class NewsCard extends StatefulWidget {
@@ -17,7 +17,7 @@ class _NewsCardState extends State<NewsCard> {
     return InkWell(
       onTap: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => LatestNews()));
+            context, MaterialPageRoute(builder: (context) => ViewNews()));
       },
       child: Container(
         height: sizeAware.height,

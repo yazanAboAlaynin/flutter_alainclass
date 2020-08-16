@@ -65,28 +65,6 @@ class Car extends Equatable {
         description
       ];
 
-  // factory Car.singlefromJson(Map<String, dynamic> json) => Car(
-  //       id: json["ID"],
-  //       title: json["Title"],
-  //       image: json["Image_ID"],
-  //       permalink: json["permalink"],
-  //       type: json["type"],
-  //       model_year: json["model_year"],
-  //       mileage: json["mileage"],
-  //       exterior: json["exterior"],
-  //       interior: json["interor"],
-  //       engine: json["engine"],
-  //       origin: json["origin"],
-  //       car_type: json["car_type"],
-  //       gear_box: json["gear_box"],
-  //       drive: json["drive"],
-  //       top_speed: json["top_speed"],
-  //       acceleration: json["acceleration"],
-  //       displacement: json["displacement"],
-  //       power: json["power"],
-  //       description: json["Description"],
-  //     );
-
   static Car fromJson(dynamic json) {
     return Car(
       id: json["ID"],

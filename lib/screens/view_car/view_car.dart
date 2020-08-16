@@ -85,15 +85,16 @@ class _ViewCarState extends State<ViewCar> {
                     child: Center(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          widget.car.title,
-                          overflow: TextOverflow.visible,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                        child: Html(
+                          data: """
+          ${widget.car.title}
+        """,
+                          style: {
+                            "*": Style(
+                              color: Colors.white,
+                              fontSize: FontSize(sizeAware.width * 0.06),
+                            ),
+                          },
                         ),
                       ),
                     ),

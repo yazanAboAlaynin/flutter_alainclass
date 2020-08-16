@@ -1,6 +1,8 @@
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/screens/view_car/view_car.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_html/style.dart';
 
 class CarCard extends StatelessWidget {
   Car car;
@@ -63,13 +65,18 @@ class CarCard extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    car.title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
+                  child: Container(
+                    child: Html(
+                      data: """
+          ${car.title}
+        """,
+                      style: {
+                        "*": Style(
+                          color: Colors.white,
+                          fontSize: FontSize(sizeAware.width * 0.04),
+                        ),
+                      },
                     ),
-                    overflow: TextOverflow.visible,
                   ),
                 ),
                 Padding(

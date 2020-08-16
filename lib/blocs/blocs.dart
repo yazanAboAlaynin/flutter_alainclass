@@ -4,3 +4,6 @@ export 'home/home_bloc.dart';
 export 'view_car/car_event.dart';
 export 'view_car/car_state.dart';
 export 'view_car/car_bloc.dart';
+export 'news/news_event.dart';
+export 'news/news_state.dart';
+export 'news/news_bloc.dart';

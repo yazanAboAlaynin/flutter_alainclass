@@ -2,6 +2,8 @@ import 'package:alainclass/repositories/home/api.dart';
 import 'package:alainclass/screens/brands.dart';
 import 'package:alainclass/screens/home/home.dart';
 import 'package:alainclass/screens/inventory.dart';
+import 'package:alainclass/screens/news/news_events.dart';
+import 'package:alainclass/screens/news/view_news.dart';
 import 'package:alainclass/screens/search_screen.dart';
 import 'package:alainclass/screens/sell_car.dart';
 import 'package:flutter/material.dart';
@@ -181,8 +183,8 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => NewsEvents()));
                 },
                 child: Container(
                   width: sizeAware.width,

@@ -10,8 +10,6 @@ class Brands extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // brands.sort();
-
     final sizeAware = MediaQuery.of(context).size;
     List<Widget> list = [];
     var sortedKeys = brands.keys.toList()..sort();
