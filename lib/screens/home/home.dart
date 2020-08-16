@@ -676,6 +676,9 @@ class _HomeState extends State<Home> {
             ),
           );
         }
+        if (state is HomeLoadFailure) {
+          return Container();
+        }
       },
     );
   }

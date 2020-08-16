@@ -14,9 +14,16 @@ class CarCard extends StatelessWidget {
           color: Colors.red,
         ),
       );
-    } else {
+    } else if (type == "Used") {
       return Text(
         'Used',
+        style: TextStyle(
+          color: Colors.grey,
+        ),
+      );
+    } else {
+      return Text(
+        'Sold',
         style: TextStyle(
           color: Colors.grey,
         ),
