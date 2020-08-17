@@ -22,6 +22,7 @@ class _SellCarState extends State<SellCar> {
   String _notes = "";
   final _formKey = GlobalKey<FormState>();
   List<Asset> images = List<Asset>();
+  File im;
 
   Future getImage() async {
     List<Asset> resultList = List<Asset>();
@@ -42,7 +43,10 @@ class _SellCarState extends State<SellCar> {
 
       final Uint8List newImage =
           (await images[0].getByteData()).buffer.asUint8List();
-      File im = File.fromRawPath(newImage);
+      setState(() {
+        // im = File.fromRawPath(newImage);
+      });
+      print(im.path);
     } on Exception catch (e) {
       print('here');
       error = e.toString();
@@ -179,13 +183,9 @@ class _SellCarState extends State<SellCar> {
                           ],
                         ),
                       ),
-                      images.isNotEmpty
+                      im != null
                           ? Container(
-                              child: AssetThumb(
-                                asset: images[0],
-                                width: 400,
-                                height: 300,
-                              ),
+                              child: Image.file(im),
                             )
                           : Container(),
                       SizedBox(
