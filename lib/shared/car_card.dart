@@ -63,20 +63,17 @@ class CarCard extends StatelessWidget {
                     width: sizeAware.width,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    child: Html(
-                      data: """
+                Container(
+                  child: Html(
+                    data: """
           ${car.title}
         """,
-                      style: {
-                        "*": Style(
-                          color: Colors.white,
-                          fontSize: FontSize(sizeAware.width * 0.04),
-                        ),
-                      },
-                    ),
+                    style: {
+                      "*": Style(
+                        color: Colors.white,
+                        fontSize: FontSize(sizeAware.width * 0.04),
+                      ),
+                    },
                   ),
                 ),
                 Padding(
