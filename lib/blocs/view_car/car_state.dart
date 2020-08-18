@@ -11,6 +11,8 @@ class CarInitial extends CarState {}
 
 class CarLoadInProgress extends CarState {}
 
+class SendFinished extends CarState {}
+
 class CarLoadSuccess extends CarState {
   final String description;
   final String main_image;

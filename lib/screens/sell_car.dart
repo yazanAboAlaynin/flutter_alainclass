@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:alainclass/repositories/sell_car/sell_car_api.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_uploader/flutter_uploader.dart';
 import 'package:multi_image_picker/multi_image_picker.dart';
 
 class SellCar extends StatefulWidget {
@@ -22,35 +22,62 @@ class _SellCarState extends State<SellCar> {
   String _notes = "";
   final _formKey = GlobalKey<FormState>();
   List<Asset> images = List<Asset>();
-  File im;
+  String _error = 'No Error Dectected';
+  Future sell(imagess) async {
+    SellCarApi().sellCar(imagess);
+  }
 
-  Future getImage() async {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  Widget buildGridView() {
+    return GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(images.length, (index) {
+        Asset asset = images[index];
+        return AssetThumb(
+          asset: asset,
+          width: 300,
+          height: 300,
+        );
+      }),
+    );
+  }
+
+  Future<void> loadAssets() async {
     List<Asset> resultList = List<Asset>();
     String error = 'No Error Dectected';
-    final uploader = FlutterUploader();
 
     try {
       resultList = await MultiImagePicker.pickImages(
         maxImages: 300,
         enableCamera: true,
+        selectedAssets: images,
+        cupertinoOptions: CupertinoOptions(takePhotoIcon: "chat"),
+        materialOptions: MaterialOptions(
+          actionBarColor: "#abcdef",
+          actionBarTitle: "Example App",
+          allViewTitle: "All Photos",
+          useDetailsView: false,
+          selectCircleStrokeColor: "#000000",
+        ),
       );
-
-      setState(() {
-        images = resultList;
-      });
-
-      final String path = "await getApplicationDocumentsDirectory().path";
-
-      final Uint8List newImage =
-          (await images[0].getByteData()).buffer.asUint8List();
-      setState(() {
-        // im = File.fromRawPath(newImage);
-      });
-      print(im.path);
     } on Exception catch (e) {
-      print('here');
       error = e.toString();
     }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      images = resultList;
+      _error = error;
+    });
+    sell(images);
   }
 
   @override
@@ -166,7 +193,7 @@ class _SellCarState extends State<SellCar> {
                         height: sizeAware.height * 0.02,
                       ),
                       InkWell(
-                        onTap: getImage,
+                        onTap: loadAssets,
                         child: Row(
                           children: <Widget>[
                             Icon(
@@ -183,11 +210,11 @@ class _SellCarState extends State<SellCar> {
                           ],
                         ),
                       ),
-                      im != null
-                          ? Container(
-                              child: Image.file(im),
-                            )
-                          : Container(),
+                      Container(
+                        height: sizeAware.height * 0.1,
+                        width: sizeAware.width,
+                        child: buildGridView(),
+                      ),
                       SizedBox(
                         height: sizeAware.height * 0.02,
                       ),

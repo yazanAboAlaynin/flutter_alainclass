@@ -22,6 +22,14 @@ class CarBloc extends Bloc<CarEvent, CarState> {
       } catch (_) {
         yield CarLoadFailure();
       }
+    } else if (event is SendEnquiries) {
+      yield CarLoadInProgress();
+      try {
+        await carRepository.sendEnquiries(event.data);
+        yield SendFinished();
+      } catch (_) {
+        yield CarLoadFailure();
+      }
     }
   }
 }

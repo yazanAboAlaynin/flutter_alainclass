@@ -13,3 +13,12 @@ class CarRequested extends CarEvent {
   @override
   List<Object> get props => [id];
 }
+
+class SendEnquiries extends CarEvent {
+  final Map<String, String> data;
+
+  SendEnquiries({this.data});
+
+  @override
+  List<Object> get props => [data];
+}
