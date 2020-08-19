@@ -8,6 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:http/http.dart' as http;
+import 'package:toast/toast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ViewCar extends StatefulWidget {
   final Car car;
@@ -34,6 +36,17 @@ class _ViewCarState extends State<ViewCar> {
     ),
   );
   CarBloc carBloc;
+  calling() async {
+    print('here');
+    const url = 'tel:0097143782222';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -68,10 +81,12 @@ class _ViewCarState extends State<ViewCar> {
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                Icon(
-                  Icons.call,
-                  size: sizeAware.width * 0.1,
-                ),
+                IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: sizeAware.width * 0.1,
+                    ),
+                    onPressed: calling)
               ],
             ),
             body: SingleChildScrollView(
@@ -130,136 +145,137 @@ class _ViewCarState extends State<ViewCar> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Model Year',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.model_year,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Model Year',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Exterior',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.exterior,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Engine',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.engine,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                                    Text(
+                                      widget.car.model_year,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        //fontSize: 18,
+                                        // fontWeight: FontWeight.bold
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Exterior',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.exterior,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        //fontSize: 18,
+                                        // fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Engine',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.engine,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        //fontSize: 18,
+                                        // fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                width: sizeAware.width * 0.2,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Mileage',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.mileage,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Mileage',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Interior',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.interior,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Origin',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.origin,
-                                    style: TextStyle(
-                                      color: Colors.white,
+                                    Text(
+                                      widget.car.mileage,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        //fontSize: 18,
+                                        // fontWeight: FontWeight.bold
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Interior',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.interior,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        //fontSize: 18,
+                                        // fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Origin',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.origin,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ],
                           ),
@@ -300,6 +316,7 @@ class _ViewCarState extends State<ViewCar> {
                                   "html": Style(
                                     backgroundColor: Colors.black12,
                                     color: Colors.white,
+                                    fontSize: FontSize(sizeAware.width * 0.05),
                                   ),
                                 },
                               ),

@@ -1,7 +1,19 @@
 import 'package:alainclass/screens/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChooseType extends StatelessWidget {
+  calling() async {
+    print('here');
+    const url = 'tel:0097143782222';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -19,10 +31,12 @@ class ChooseType extends StatelessWidget {
           //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
-          Icon(
-            Icons.call,
-            size: sizeAware.width * 0.1,
-          ),
+          IconButton(
+              icon: Icon(
+                Icons.call,
+                size: sizeAware.width * 0.1,
+              ),
+              onPressed: calling)
         ],
       ),
       body: Padding(

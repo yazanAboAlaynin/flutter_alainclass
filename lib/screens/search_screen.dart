@@ -7,6 +7,7 @@ import 'package:alainclass/shared/show_cars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class SearchScreen extends StatefulWidget {
   final String brand;
@@ -21,6 +22,17 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  calling() async {
+    print('here');
+    const url = 'tel:0097143782222';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   final HomeRepository homeRepository = HomeRepository(
     api: Api(
       httpClient: http.Client(),
@@ -75,10 +87,12 @@ class _SearchScreenState extends State<SearchScreen> {
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                Icon(
-                  Icons.call,
-                  size: sizeAware.width * 0.1,
-                ),
+                IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: sizeAware.width * 0.1,
+                    ),
+                    onPressed: calling)
               ],
             ),
             drawer: Drawer(

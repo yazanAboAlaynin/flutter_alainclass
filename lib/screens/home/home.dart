@@ -2,7 +2,7 @@ import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/screens/home/image_carusel.dart';
-import 'package:alainclass/screens/sell_car.dart';
+import 'package:alainclass/screens/sell_car/sell_car.dart';
 import 'package:alainclass/shared/car_card.dart';
 import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/my_drawer.dart';
@@ -11,6 +11,7 @@ import 'package:alainclass/shared/show_cars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _HomeState extends State<Home> {
   String brand = "";
   String year = "";
   String neworused = "";
+
   @override
   void initState() {
     super.initState();
@@ -102,6 +104,17 @@ class _HomeState extends State<Home> {
     ],
   );
 
+  calling() async {
+    print('here');
+    const url = 'tel:0097143782222';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -137,9 +150,12 @@ class _HomeState extends State<Home> {
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                Icon(
-                  Icons.call,
-                  size: sizeAware.width * 0.1,
+                IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    size: sizeAware.width * 0.1,
+                  ),
+                  onPressed: calling,
                 ),
               ],
             ),
@@ -419,10 +435,12 @@ class _HomeState extends State<Home> {
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                Icon(
-                  Icons.call,
-                  size: sizeAware.width * 0.1,
-                ),
+                IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: sizeAware.width * 0.1,
+                    ),
+                    onPressed: calling)
               ],
             ),
             drawer: Drawer(

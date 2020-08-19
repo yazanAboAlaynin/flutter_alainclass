@@ -62,9 +62,7 @@ class CarApi {
       'Accept': 'application/json',
       'authorization': basicAuth,
     });
-    if (response.statusCode != 200) {
-      print(response.statusCode);
-      print(response.body);
+    if (response.statusCode != 201) {
       throw Exception('error');
     }
     print(response.body);

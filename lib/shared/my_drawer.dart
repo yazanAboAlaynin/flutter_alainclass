@@ -1,11 +1,13 @@
 import 'package:alainclass/repositories/home/api.dart';
+import 'package:alainclass/screens/about_us.dart';
 import 'package:alainclass/screens/brands.dart';
+import 'package:alainclass/screens/contact_us/contact_us.dart';
 import 'package:alainclass/screens/home/home.dart';
 import 'package:alainclass/screens/inventory.dart';
 import 'package:alainclass/screens/news/news_events.dart';
 import 'package:alainclass/screens/news/view_news.dart';
 import 'package:alainclass/screens/search_screen.dart';
-import 'package:alainclass/screens/sell_car.dart';
+import 'package:alainclass/screens/sell_car/sell_car.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -227,8 +229,8 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => AboutUs()));
                 },
                 child: Container(
                   child: Padding(
@@ -248,8 +250,8 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ContactUs()));
                 },
                 child: Container(
                   width: sizeAware.width,

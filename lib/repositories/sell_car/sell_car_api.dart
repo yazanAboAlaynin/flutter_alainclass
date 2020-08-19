@@ -13,7 +13,7 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 class SellCarApi {
   static const baseUrl = 'https://www.alainclass.com';
 
-  Future sellCar(List<Asset> assets) async {
+  Future sellCar(List<Asset> assets, data) async {
     print(assets.length);
     final url = '$baseUrl/api/sellyourcar.php';
     Uri uri = Uri.parse(url);
@@ -36,8 +36,15 @@ class SellCarApi {
       cnt++;
     });
 
-    request.fields['email'] = 'yazan@gmail.com';
-    request.fields['name'] = 'yazan';
+    request.fields['email'] = data['email'];
+    request.fields['name'] = data['name'];
+    request.fields['number'] = data['number'];
+    request.fields['make'] = data['make'];
+    request.fields['model'] = data['model'];
+    request.fields['year'] = data['year'];
+    request.fields['millage'] = data['millage'];
+    request.fields['price'] = data['price'];
+    request.fields['notes'] = data['notes'];
 
     var response = await request.send();
     print(response.reasonPhrase);
