@@ -43,6 +43,21 @@ class Api {
     return search_list;
   }
 
+  Future<List<News>> getNews() async {
+    final url = '$baseUrl/api/news.php';
+    final response = await this.httpClient.post(url);
+    print(response.body);
+    if (response.statusCode != 200) {
+      throw Exception('error');
+    }
+
+    final result = jsonDecode(response.body)['news'] as List;
+    final List<News> news =
+        result.map((dynamic i) => News.fromJson(i)).toList();
+
+    return news;
+  }
+
   Future<List<Car>> search(brand, year, neworused) async {
     final url = '$baseUrl/api/searchresult.php';
     Map<String, String> data = {

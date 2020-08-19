@@ -37,23 +37,10 @@ class _NewsCardState extends State<NewsCard> {
               Container(
                 height: sizeAware.height * 0.3,
                 width: sizeAware.width,
-                child: Image.asset(
-                  widget.image,
+                child: Image.network(
+                  "https://www.alainclass.com/" + widget.image,
                   fit: BoxFit.cover,
                   width: sizeAware.width,
-                ),
-              ),
-              Positioned(
-                bottom: 2,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'blahblahb lahbla h blahblahb lahbla b lahbla h blahblahb lahblga h',
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
                 ),
               ),
             ],

@@ -13,7 +13,9 @@ class HomeRepository {
   Future<List> getHomePage() async {
     final List home_page = await api.getHomePage();
     final List search_list = await api.getSearchList();
+    final List latest_news = await api.getNews();
     home_page.add(search_list);
+    home_page.add(latest_news);
     return home_page;
   }
 

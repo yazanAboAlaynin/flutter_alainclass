@@ -2,6 +2,7 @@ import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/screens/home/image_carusel.dart';
+import 'package:alainclass/screens/news/all_news.dart';
 import 'package:alainclass/screens/sell_car/sell_car.dart';
 import 'package:alainclass/shared/car_card.dart';
 import 'package:alainclass/shared/footer.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+import 'show_latest_news.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -28,6 +30,7 @@ class _HomeState extends State<Home> {
   List<Car> new_arrivals = [];
   List slider_images = [];
   List search_list = [];
+  List latest_news = [];
   String brand = "";
   String year = "";
   String neworused = "";
@@ -86,23 +89,6 @@ class _HomeState extends State<Home> {
     }
     return list;
   }
-
-  Widget latest_news = Row(
-    children: <Widget>[
-      NewsCard(
-        image: 'assets/images/cover4.jpg',
-      ),
-      NewsCard(
-        image: 'assets/images/cover5.jpg',
-      ),
-      NewsCard(
-        image: 'assets/images/cover6.jpg',
-      ),
-      NewsCard(
-        image: 'assets/images/cover1.jpg',
-      ),
-    ],
-  );
 
   calling() async {
     print('here');
@@ -394,9 +380,7 @@ class _HomeState extends State<Home> {
                     height: sizeAware.height * 0.3,
                     child: ListView(
                       scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        latest_news,
-                      ],
+                      children: <Widget>[],
                     ),
                   ),
                   SizedBox(height: sizeAware.height * 0.04),
@@ -414,6 +398,7 @@ class _HomeState extends State<Home> {
           new_arrivals = state.new_arrivals ?? [];
           slider_images = state.slider_images ?? [];
           search_list = state.search_list ?? [];
+          latest_news = state.latest_news ?? [];
 
           return Scaffold(
             key: _scaffoldKey,
@@ -675,12 +660,8 @@ class _HomeState extends State<Home> {
                         color: Colors.white, fontSize: sizeAware.width * 0.05),
                   ),
                   Container(
-                    height: sizeAware.height * 0.3,
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        latest_news,
-                      ],
+                    child: ShowNews(
+                      news: latest_news,
                     ),
                   ),
                   SizedBox(height: sizeAware.height * 0.04),

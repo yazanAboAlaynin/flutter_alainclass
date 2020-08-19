@@ -22,11 +22,14 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final List<Car> new_arrivals = home_page[0];
         final List sliders = home_page[1];
         final List search_list = home_page[2];
-        //print(slider_images);
+        final List latest_news = home_page[3];
+
         yield HomeLoadSuccess(
-            new_arrivals: new_arrivals,
-            slider_images: sliders,
-            search_list: search_list);
+          new_arrivals: new_arrivals,
+          slider_images: sliders,
+          search_list: search_list,
+          latest_news: latest_news,
+        );
       } catch (_) {
         yield HomeLoadFailure();
       }
