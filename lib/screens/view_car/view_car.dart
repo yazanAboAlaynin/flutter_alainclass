@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
 import 'package:http/http.dart' as http;
+import 'package:share/share.dart';
 import 'package:toast/toast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -83,10 +84,21 @@ class _ViewCarState extends State<ViewCar> {
               actions: <Widget>[
                 IconButton(
                     icon: Icon(
-                      Icons.call,
-                      size: sizeAware.width * 0.1,
+                      Icons.share,
+                      size: sizeAware.width * 0.07,
                     ),
-                    onPressed: calling)
+                    onPressed: () {
+                      final RenderBox box = context.findRenderObject();
+                      Share.share("${widget.car.permalink}",
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    }),
+                IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: sizeAware.width * 0.07,
+                    ),
+                    onPressed: calling),
               ],
             ),
             body: SingleChildScrollView(
