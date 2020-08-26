@@ -14,7 +14,6 @@ class SellCarApi {
   static const baseUrl = 'https://www.alainclass.com';
 
   Future sellCar(List<Asset> assets, data) async {
-    print(assets.length);
     final url = '$baseUrl/api/sellyourcar.php';
     Uri uri = Uri.parse(url);
 
@@ -30,7 +29,7 @@ class SellCarApi {
         filename: '$cnt.jpg',
         contentType: MediaType("image", "jpg"),
       );
-      print(multipartFile);
+
       files.add(multipartFile);
       request.files.insert(cnt, multipartFile);
       cnt++;
@@ -47,7 +46,6 @@ class SellCarApi {
     request.fields['notes'] = data['notes'];
 
     var response = await request.send();
-    print(response.reasonPhrase);
   }
 
   Map<String, String> _setHeaders() => {

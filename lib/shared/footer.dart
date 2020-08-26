@@ -47,6 +47,13 @@ class MyFooter extends StatelessWidget {
             SizedBox(
               height: sizeAware.height * 0.03,
             ),
+            Text(
+              'copyright © 2020 Alain Class Motors',
+              style: TextStyle(color: Colors.white),
+            ),
+            SizedBox(
+              height: sizeAware.height * 0.03,
+            ),
           ],
         ),
       ),

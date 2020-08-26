@@ -233,6 +233,7 @@ class _MyDrawerState extends State<MyDrawer> {
                       MaterialPageRoute(builder: (context) => AboutUs()));
                 },
                 child: Container(
+                  width: sizeAware.width,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
