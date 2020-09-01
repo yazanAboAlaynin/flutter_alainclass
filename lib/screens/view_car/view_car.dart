@@ -78,14 +78,14 @@ class _ViewCarState extends State<ViewCar> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: sizeAware.width * 0.4,
+                width: 90,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
                 IconButton(
                     icon: Icon(
                       Icons.share,
-                      size: sizeAware.width * 0.07,
+                      size: 35,
                     ),
                     onPressed: () {
                       final RenderBox box = context.findRenderObject();
@@ -94,18 +94,19 @@ class _ViewCarState extends State<ViewCar> {
                               box.localToGlobal(Offset.zero) & box.size);
                     }),
                 IconButton(
-                    icon: Icon(
-                      Icons.call,
-                      size: sizeAware.width * 0.07,
-                    ),
-                    onPressed: calling),
+                  icon: Icon(
+                    Icons.call,
+                    size: 35,
+                  ),
+                  onPressed: calling,
+                ),
               ],
             ),
             body: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: sizeAware.height * 0.3,
+                    height: sizeAware.width * 0.6,
                     width: sizeAware.width,
                     child: Image.network(
                       'https://www.alainclass.com/' + widget.car.image,
@@ -294,6 +295,26 @@ class _ViewCarState extends State<ViewCar> {
                           Divider(
                             color: Colors.grey[600],
                           ),
+                          Row(
+                            children: [
+                              Text(
+                                'Price: ',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                widget.car.price ?? 'Not Avilable',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Divider(
+                            color: Colors.grey[600],
+                          ),
                           InkWell(
                             onTap: () {
                               setState(() {
@@ -349,7 +370,7 @@ class _ViewCarState extends State<ViewCar> {
                     ),
                   ),
                   Container(
-                    height: sizeAware.height * 0.3,
+                    height: sizeAware.width * 0.5,
                     child: ManuallyControlledSlider(images: images),
                   ),
                   SizedBox(
@@ -616,13 +637,27 @@ class _ViewCarState extends State<ViewCar> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: sizeAware.width * 0.4,
+                width: 90,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                Icon(
-                  Icons.call,
-                  size: sizeAware.width * 0.1,
+                IconButton(
+                    icon: Icon(
+                      Icons.share,
+                      size: 35,
+                    ),
+                    onPressed: () {
+                      final RenderBox box = context.findRenderObject();
+                      Share.share("${widget.car.permalink}",
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
+                    }),
+                IconButton(
+                  icon: Icon(
+                    Icons.call,
+                    size: 35,
+                  ),
+                  onPressed: calling,
                 ),
               ],
             ),
@@ -1130,7 +1165,17 @@ class _ViewCarState extends State<ViewCar> {
           );
         }
         if (state is CarLoadFailure) {
-          return Container();
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
+              child: FlatButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    carBloc.add(CarRequested(id: widget.car.id));
+                  },
+                  child: Text('Try Again')),
+            ),
+          );
         }
       },
     );

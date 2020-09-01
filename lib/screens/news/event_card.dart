@@ -32,7 +32,7 @@ class EventCard extends StatelessWidget {
                 Stack(
                   children: [
                     Container(
-                      height: sizeAware.height * 0.34,
+                      height: sizeAware.width * 0.6,
                       width: sizeAware.width,
                       child: Image.network(
                         'https://www.alainclass.com/' + news.image,

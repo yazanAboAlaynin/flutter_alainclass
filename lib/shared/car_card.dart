@@ -55,7 +55,7 @@ class CarCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Container(
-                  height: sizeAware.height * 0.34,
+                  height: sizeAware.width * 0.55,
                   width: sizeAware.width,
                   child: Image.network(
                     'https://www.alainclass.com/' + car.image,

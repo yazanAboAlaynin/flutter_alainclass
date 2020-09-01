@@ -6,7 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 class Brands extends StatelessWidget {
   final Map brands;
 
-  Brands({Key key, this.brands}) : super(key: key);
+  Brands({this.brands});
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   calling() async {
     print('here');
@@ -108,11 +108,12 @@ class Brands extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-              icon: Icon(
-                Icons.call,
-                size: sizeAware.width * 0.1,
-              ),
-              onPressed: calling)
+            icon: Icon(
+              Icons.call,
+              size: sizeAware.width * 0.1,
+            ),
+            onPressed: calling,
+          )
         ],
       ),
       drawer: Drawer(

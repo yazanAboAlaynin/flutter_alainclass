@@ -20,6 +20,7 @@ class Car extends Equatable {
   final String displacement;
   final String power;
   final String description;
+  final String price;
 
   Car(
       {this.id,
@@ -40,7 +41,8 @@ class Car extends Equatable {
       this.acceleration,
       this.displacement,
       this.power,
-      this.description});
+      this.description,
+      this.price});
 
   @override
   List<Object> get props => [
@@ -62,7 +64,8 @@ class Car extends Equatable {
         acceleration,
         displacement,
         power,
-        description
+        description,
+        price
       ];
 
   static Car fromJson(dynamic json) {
@@ -86,6 +89,9 @@ class Car extends Equatable {
       displacement: json["displacement"],
       power: json["power"],
       description: json["Description"],
+      price: (json["price"]) != null
+          ? json["price"] is bool ? '' : json["price"]
+          : '',
     );
   }
 }

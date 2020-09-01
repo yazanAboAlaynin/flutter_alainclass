@@ -32,11 +32,12 @@ class ChooseType extends StatelessWidget {
         ),
         actions: <Widget>[
           IconButton(
-              icon: Icon(
-                Icons.call,
-                size: sizeAware.width * 0.1,
-              ),
-              onPressed: calling)
+            icon: Icon(
+              Icons.call,
+              size: sizeAware.width * 0.1,
+            ),
+            onPressed: calling,
+          )
         ],
       ),
       body: Padding(

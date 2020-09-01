@@ -74,7 +74,7 @@ class _SearchScreenState extends State<SearchScreen> {
               leading: IconButton(
                 icon: Icon(
                   Icons.menu,
-                  size: sizeAware.width * 0.1,
+                  size: 45,
                 ),
                 onPressed: () => _scaffoldKey.currentState.openDrawer(),
               ),
@@ -83,16 +83,17 @@ class _SearchScreenState extends State<SearchScreen> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: sizeAware.width * 0.4,
+                width: 90,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
                 IconButton(
-                    icon: Icon(
-                      Icons.call,
-                      size: sizeAware.width * 0.1,
-                    ),
-                    onPressed: calling)
+                  icon: Icon(
+                    Icons.call,
+                    size: 40,
+                  ),
+                  onPressed: calling,
+                ),
               ],
             ),
             drawer: Drawer(
@@ -108,6 +109,22 @@ class _SearchScreenState extends State<SearchScreen> {
                   MyFooter(),
                 ],
               ),
+            ),
+          );
+        }
+        if (state is HomeLoadFailure) {
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
+              child: FlatButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    homeBloc.add(SearchRequested(
+                        brand: widget.brand,
+                        neworused: widget.neworused,
+                        year: widget.year));
+                  },
+                  child: Text('Try Again')),
             ),
           );
         }

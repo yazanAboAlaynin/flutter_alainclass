@@ -35,7 +35,7 @@ class _NewsCardState extends State<NewsCard> {
           child: Stack(
             children: <Widget>[
               Container(
-                height: sizeAware.height * 0.3,
+                height: sizeAware.width * 0.6,
                 width: sizeAware.width,
                 child: Image.network(
                   "https://www.alainclass.com/" + widget.image,

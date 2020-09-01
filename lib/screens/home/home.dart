@@ -9,11 +9,9 @@ import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:alainclass/shared/news_card.dart';
 import 'package:alainclass/shared/show_cars.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
@@ -26,74 +24,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String _appBadgeSupported = 'Unknown';
-  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
-
-  Future onSelectNotification(payload) async {
-    showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: Text("title"),
-              content: Text('payload: $payload'),
-            ));
-  }
-
-  Future onDidReceiveLocalNotification(
-      int id, String title, String body, String payload) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => CupertinoAlertDialog(
-        title: Text(title),
-        content: Text(body),
-        actions: [
-          CupertinoDialogAction(
-            isDefaultAction: true,
-            child: Text('Ok'),
-            onPressed: () async {},
-          )
-        ],
-      ),
-    );
-  }
-
-  Future _showNotificationWithDefaultSound(String t, String c) async {
-    var androidPlatformChannelSpecifics = new AndroidNotificationDetails(
-        'your channel id', 'your channel name', 'your channel description',
-        importance: Importance.Max, priority: Priority.High);
-    var iOSPlatformChannelSpecifics = new IOSNotificationDetails();
-    var platformChannelSpecifics = new NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.show(
-      0,
-      t,
-      c,
-      platformChannelSpecifics,
-    );
-  }
-
-  initPlatformState() async {
-    String appBadgeSupported;
-    try {
-      bool res = await FlutterAppBadger.isAppBadgeSupported();
-      if (res) {
-        appBadgeSupported = 'Supported';
-      } else {
-        appBadgeSupported = 'Not supported';
-      }
-    } on PlatformException {
-      appBadgeSupported = 'Failed to get badge support.';
-    }
-
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
-
-    setState(() {
-      _appBadgeSupported = appBadgeSupported;
-    });
-  }
-
   final HomeRepository homeRepository = HomeRepository(
     api: Api(
       httpClient: http.Client(),
@@ -112,36 +42,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _removeBadge();
     homeBloc = HomeBloc(homeRepository: homeRepository);
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-
-    var initializationSettingsIOS = IOSInitializationSettings();
-
-    var initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-
-    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
-    _firebaseMessaging.configure(
-      onMessage: (Map<String, dynamic> message) async {
-        print("onMessage: $message");
-        _showNotificationWithDefaultSound(
-            message['notification']['title'], message['notification']['body']);
-        //_addBadge(++cnt);
-      },
-      onLaunch: (Map<String, dynamic> message) async {
-        print("onLaunch: $message");
-        _addBadge(++cnt);
-      },
-      onResume: (Map<String, dynamic> message) async {
-        print("onResume: $message");
-        _addBadge(++cnt);
-      },
-    );
   }
 
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -226,7 +127,7 @@ class _HomeState extends State<Home> {
               leading: IconButton(
                 icon: Icon(
                   Icons.menu,
-                  size: sizeAware.width * 0.1,
+                  size: 45,
                 ),
                 onPressed: () => _scaffoldKey.currentState.openDrawer(),
               ),
@@ -235,14 +136,14 @@ class _HomeState extends State<Home> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: sizeAware.width * 0.4,
+                width: 90,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
                 IconButton(
                   icon: Icon(
                     Icons.call,
-                    size: sizeAware.width * 0.1,
+                    size: 40,
                   ),
                   onPressed: calling,
                 ),
@@ -311,7 +212,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              height: sizeAware.height * 0.07,
+                              // height: sizeAware.height * 0.08,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -349,7 +250,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              height: sizeAware.height * 0.07,
+                              // height: sizeAware.height * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -387,7 +288,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              height: sizeAware.height * 0.07,
+                              // height: sizeAware.height * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -427,7 +328,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              height: sizeAware.height * 0.07,
+                              height: sizeAware.height * 0.09,
                               minWidth: sizeAware.width,
                               shape: ContinuousRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -508,7 +409,7 @@ class _HomeState extends State<Home> {
               leading: IconButton(
                 icon: Icon(
                   Icons.menu,
-                  size: sizeAware.width * 0.1,
+                  size: 45,
                 ),
                 onPressed: () => _scaffoldKey.currentState.openDrawer(),
               ),
@@ -517,16 +418,17 @@ class _HomeState extends State<Home> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: sizeAware.width * 0.4,
+                width: 90,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
                 IconButton(
-                    icon: Icon(
-                      Icons.call,
-                      size: sizeAware.width * 0.1,
-                    ),
-                    onPressed: calling)
+                  icon: Icon(
+                    Icons.call,
+                    size: 40,
+                  ),
+                  onPressed: calling,
+                ),
               ],
             ),
             drawer: Drawer(
@@ -592,7 +494,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              height: sizeAware.height * 0.07,
+                              // height: sizeAware.height * 0.08,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -630,7 +532,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              height: sizeAware.height * 0.07,
+                              // height: sizeAware.height * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -668,7 +570,7 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              height: sizeAware.height * 0.07,
+                              // height: sizeAware.height * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -708,7 +610,7 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              height: sizeAware.height * 0.07,
+                              height: sizeAware.height * 0.09,
                               minWidth: sizeAware.width,
                               shape: ContinuousRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -777,17 +679,19 @@ class _HomeState extends State<Home> {
           );
         }
         if (state is HomeLoadFailure) {
-          return Container();
+          return Scaffold(
+            backgroundColor: Colors.black,
+            body: Center(
+              child: FlatButton(
+                  color: Colors.white,
+                  onPressed: () {
+                    homeBloc.add(HomeRequested());
+                  },
+                  child: Text('Try Again')),
+            ),
+          );
         }
       },
     );
-  }
-
-  void _addBadge(i) {
-    FlutterAppBadger.updateBadgeCount(i);
-  }
-
-  void _removeBadge() {
-    FlutterAppBadger.removeBadge();
   }
 }

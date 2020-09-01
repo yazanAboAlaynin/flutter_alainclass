@@ -26,7 +26,7 @@ class AboutUs extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.menu,
-            size: sizeAware.width * 0.1,
+            size: 45,
           ),
           onPressed: () => _scaffoldKey.currentState.openDrawer(),
         ),
@@ -35,16 +35,17 @@ class AboutUs extends StatelessWidget {
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: sizeAware.width * 0.4,
+          width: 90,
           //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
           IconButton(
-              icon: Icon(
-                Icons.call,
-                size: sizeAware.width * 0.1,
-              ),
-              onPressed: calling)
+            icon: Icon(
+              Icons.call,
+              size: 40,
+            ),
+            onPressed: calling,
+          ),
         ],
       ),
       drawer: Drawer(

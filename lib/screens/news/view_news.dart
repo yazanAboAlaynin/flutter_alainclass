@@ -38,7 +38,7 @@ class ViewNews extends StatelessWidget {
           IconButton(
               icon: Icon(
                 Icons.call,
-                size: sizeAware.width * 0.1,
+                size: 40,
               ),
               onPressed: calling)
         ],
@@ -48,7 +48,7 @@ class ViewNews extends StatelessWidget {
           children: <Widget>[
             Container(
               width: sizeAware.width,
-              height: sizeAware.height * 0.3,
+              height: sizeAware.width * 0.6,
               child: Image.network(
                 'https://www.alainclass.com/' + news.image,
                 fit: BoxFit.cover,

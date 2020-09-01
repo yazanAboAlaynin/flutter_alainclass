@@ -104,7 +104,7 @@ class _MyDrawerState extends State<MyDrawer> {
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: sizeAware.width * 0.4,
+          width: 100,
         ),
       ),
       body: SingleChildScrollView(
@@ -159,12 +159,14 @@ class _MyDrawerState extends State<MyDrawer> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Brands(
-                                brands: search_list[0],
-                              )));
+                  search_list.length != 0
+                      ? Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Brands(
+                                    brands: search_list[0],
+                                  )))
+                      : () {};
                 },
                 child: Container(
                   width: sizeAware.width,
@@ -285,19 +287,19 @@ class _MyDrawerState extends State<MyDrawer> {
                       Icon(
                         Icons.search,
                         color: Colors.white,
-                        size: sizeAware.width * 0.1,
+                        size: 30,
                       ),
                       Text(
                         'Search Your Car',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 18,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold),
                       ),
                       Icon(
                         Icons.arrow_drop_down,
                         color: Colors.white,
-                        size: sizeAware.width * 0.1,
+                        size: 30,
                       ),
                     ],
                   ),
@@ -317,7 +319,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             color: Colors.grey[800],
                             borderRadius: BorderRadius.all(Radius.circular(6)),
                           ),
-                          height: sizeAware.height * 0.07,
+                          //  height: sizeAware.height * 0.07,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
@@ -355,7 +357,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             color: Colors.grey[800],
                             borderRadius: BorderRadius.all(Radius.circular(6)),
                           ),
-                          height: sizeAware.height * 0.07,
+                          //   height: sizeAware.height * 0.07,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
@@ -393,7 +395,7 @@ class _MyDrawerState extends State<MyDrawer> {
                             color: Colors.grey[800],
                             borderRadius: BorderRadius.all(Radius.circular(6)),
                           ),
-                          height: sizeAware.height * 0.07,
+                          //      height: sizeAware.height * 0.07,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
@@ -438,7 +440,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                             );
                           },
-                          height: sizeAware.height * 0.07,
+                          //   height: sizeAware.height * 0.07,
                           minWidth: sizeAware.width,
                           shape: ContinuousRectangleBorder(
                             borderRadius: BorderRadius.circular(8),

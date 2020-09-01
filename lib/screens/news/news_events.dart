@@ -8,6 +8,7 @@ import 'package:alainclass/shared/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class NewsEvents extends StatefulWidget {
   @override
@@ -33,6 +34,17 @@ class _NewsEventsState extends State<NewsEvents> {
     newsBloc = NewsBloc(newsRepository: newsRepository);
   }
 
+  calling() async {
+    print('here');
+    const url = 'tel:0097143782222';
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
@@ -54,7 +66,7 @@ class _NewsEventsState extends State<NewsEvents> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.menu,
-                    size: sizeAware.width * 0.1,
+                    size: 45,
                   ),
                   onPressed: () => _scaffoldKey.currentState.openDrawer(),
                 ),
@@ -63,13 +75,16 @@ class _NewsEventsState extends State<NewsEvents> {
                 title: Image.asset(
                   'assets/images/black_logo.png',
                   fit: BoxFit.cover,
-                  width: sizeAware.width * 0.4,
+                  width: 90,
                   //height: sizeAware.height * 0.01,
                 ),
                 actions: <Widget>[
-                  Icon(
-                    Icons.call,
-                    size: sizeAware.width * 0.1,
+                  IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: 40,
+                    ),
+                    onPressed: calling,
                   ),
                 ],
               ),
@@ -92,7 +107,17 @@ class _NewsEventsState extends State<NewsEvents> {
             );
           }
           if (state is NewsLoadFailure) {
-            return Container();
+            return Scaffold(
+              backgroundColor: Colors.black,
+              body: Center(
+                child: FlatButton(
+                    color: Colors.white,
+                    onPressed: () {
+                      newsBloc.add(NewsRequested());
+                    },
+                    child: Text('Try Again')),
+              ),
+            );
           }
         });
   }
