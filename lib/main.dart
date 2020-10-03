@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:onesignal/onesignal.dart';
+
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'blocs/simple_bloc_observer.dart';
 

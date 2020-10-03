@@ -13,7 +13,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:alainclass/main.dart';
@@ -157,7 +156,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: sizeAware.height * 0.4,
+                    height: sizeAware.height * 0.3,
                     child: ImageCarusel(
                       images: slider_images,
                     ),
@@ -439,7 +438,7 @@ class _HomeState extends State<Home> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    height: sizeAware.height * 0.4,
+                    height: sizeAware.height * 0.3,
                     child: ImageCarusel(
                       images: slider_images,
                     ),
