@@ -27,17 +27,20 @@ class ChooseType extends StatelessWidget {
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: sizeAware.width * 0.4,
+          width: 130,
           //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.call,
-              size: sizeAware.width * 0.1,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+            child: IconButton(
+              icon: Icon(
+                Icons.call,
+                size: 40,
+              ),
+              onPressed: calling,
             ),
-            onPressed: calling,
-          )
+          ),
         ],
       ),
       body: Padding(
@@ -67,9 +70,9 @@ class ChooseType extends StatelessWidget {
                     child: Text(
                       'All',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -96,9 +99,9 @@ class ChooseType extends StatelessWidget {
                     child: Text(
                       'New',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -125,9 +128,9 @@ class ChooseType extends StatelessWidget {
                     child: Text(
                       'Used',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -154,9 +157,9 @@ class ChooseType extends StatelessWidget {
                     child: Text(
                       'Sold',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),

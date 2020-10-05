@@ -52,8 +52,7 @@ class EventCard extends StatelessWidget {
         """,
                             style: {
                               "html": Style(
-                                color: Colors.white,
-                              ),
+                                  color: Colors.white, fontFamily: 'Gentium'),
                             },
                           ),
                         ),
@@ -79,7 +78,7 @@ class EventCard extends StatelessWidget {
                   padding: const EdgeInsets.fromLTRB(8.0, 2.0, 8.0, 4.0),
                   child: Text(
                     "Read More",
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: Colors.red, fontFamily: 'Gentium'),
                   ),
                 ),
               ],

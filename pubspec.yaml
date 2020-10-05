@@ -38,6 +38,9 @@ dependencies:
   flutter_local_notifications: ^1.4.4+4
   share : ^0.5.3
   onesignal_flutter: ^2.6.1
+  animated_list_view_scroll: ^1.0.2
+  auto_animated: any
+  delayed_display: ^1.0.3
   
 dev_dependencies:
   flutter_test:
@@ -71,10 +74,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Gentium
+      fonts:
+        - asset: assets/fonts/GentiumBookBasic-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

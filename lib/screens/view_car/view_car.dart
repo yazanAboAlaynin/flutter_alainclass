@@ -77,27 +77,33 @@ class _ViewCarState extends State<ViewCar> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: 90,
+                width: 130,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                IconButton(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.share,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        final RenderBox box = context.findRenderObject();
+                        Share.share("${widget.car.permalink}",
+                            sharePositionOrigin:
+                                box.localToGlobal(Offset.zero) & box.size);
+                      }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  child: IconButton(
                     icon: Icon(
-                      Icons.share,
-                      size: 35,
+                      Icons.call,
+                      size: 30,
                     ),
-                    onPressed: () {
-                      final RenderBox box = context.findRenderObject();
-                      Share.share("${widget.car.permalink}",
-                          sharePositionOrigin:
-                              box.localToGlobal(Offset.zero) & box.size);
-                    }),
-                IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: 35,
+                    onPressed: calling,
                   ),
-                  onPressed: calling,
                 ),
               ],
             ),
@@ -123,9 +129,9 @@ class _ViewCarState extends State<ViewCar> {
         """,
                           style: {
                             "*": Style(
-                              color: Colors.white,
-                              fontSize: FontSize(sizeAware.width * 0.06),
-                            ),
+                                color: Colors.white,
+                                fontSize: FontSize(sizeAware.width * 0.06),
+                                fontFamily: 'Gentium'),
                           },
                         ),
                       ),
@@ -147,7 +153,8 @@ class _ViewCarState extends State<ViewCar> {
                                 style: TextStyle(
                                     color: Colors.red,
                                     fontSize: 25,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Gentium'),
                               ),
                             ],
                           ),
@@ -166,7 +173,8 @@ class _ViewCarState extends State<ViewCar> {
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.02,
@@ -174,10 +182,11 @@ class _ViewCarState extends State<ViewCar> {
                                     Text(
                                       widget.car.model_year,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        //fontSize: 18,
-                                        // fontWeight: FontWeight.bold
-                                      ),
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.03,
@@ -187,7 +196,8 @@ class _ViewCarState extends State<ViewCar> {
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.02,
@@ -195,10 +205,11 @@ class _ViewCarState extends State<ViewCar> {
                                     Text(
                                       widget.car.exterior,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        //fontSize: 18,
-                                        // fontWeight: FontWeight.bold
-                                      ),
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.03,
@@ -208,7 +219,8 @@ class _ViewCarState extends State<ViewCar> {
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.02,
@@ -216,10 +228,11 @@ class _ViewCarState extends State<ViewCar> {
                                     Text(
                                       widget.car.engine,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        //fontSize: 18,
-                                        // fontWeight: FontWeight.bold
-                                      ),
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
                                     ),
                                   ],
                                 ),
@@ -233,7 +246,8 @@ class _ViewCarState extends State<ViewCar> {
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.02,
@@ -241,10 +255,11 @@ class _ViewCarState extends State<ViewCar> {
                                     Text(
                                       widget.car.mileage,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        //fontSize: 18,
-                                        // fontWeight: FontWeight.bold
-                                      ),
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.03,
@@ -254,7 +269,8 @@ class _ViewCarState extends State<ViewCar> {
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.02,
@@ -262,10 +278,11 @@ class _ViewCarState extends State<ViewCar> {
                                     Text(
                                       widget.car.interior,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                        //fontSize: 18,
-                                        // fontWeight: FontWeight.bold
-                                      ),
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.03,
@@ -275,7 +292,8 @@ class _ViewCarState extends State<ViewCar> {
                                       style: TextStyle(
                                           color: Colors.red,
                                           fontSize: 18,
-                                          fontWeight: FontWeight.bold),
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
                                     SizedBox(
                                       height: sizeAware.height * 0.02,
@@ -283,8 +301,8 @@ class _ViewCarState extends State<ViewCar> {
                                     Text(
                                       widget.car.origin,
                                       style: TextStyle(
-                                        color: Colors.white,
-                                      ),
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'),
                                     ),
                                   ],
                                 ),
@@ -301,13 +319,13 @@ class _ViewCarState extends State<ViewCar> {
                                 style: TextStyle(
                                     color: Colors.red,
                                     fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Gentium'),
                               ),
                               Text(
                                 widget.car.price ?? 'Not Avilable',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                             ],
                           ),
@@ -328,7 +346,8 @@ class _ViewCarState extends State<ViewCar> {
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Gentium'),
                                 ),
                                 Icon(
                                   Icons.arrow_drop_down,
@@ -346,10 +365,11 @@ class _ViewCarState extends State<ViewCar> {
         """,
                                 style: {
                                   "html": Style(
-                                    backgroundColor: Colors.black12,
-                                    color: Colors.white,
-                                    fontSize: FontSize(sizeAware.width * 0.05),
-                                  ),
+                                      backgroundColor: Colors.black12,
+                                      color: Colors.white,
+                                      fontSize:
+                                          FontSize(sizeAware.width * 0.05),
+                                      fontFamily: 'Gentium'),
                                 },
                               ),
                             ),
@@ -364,9 +384,9 @@ class _ViewCarState extends State<ViewCar> {
                   Text(
                     'Car Photos',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: sizeAware.width * 0.10,
-                    ),
+                        color: Colors.white,
+                        fontSize: sizeAware.width * 0.10,
+                        fontFamily: 'Gentium'),
                   ),
                   Container(
                     height: sizeAware.width * 0.5,
@@ -382,14 +402,14 @@ class _ViewCarState extends State<ViewCar> {
                   Text(
                     'Enquiries',
                     style: TextStyle(
-                      color: Colors.red,
-                      fontSize: sizeAware.width * 0.05,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        color: Colors.red,
+                        fontSize: sizeAware.width * 0.05,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Gentium'),
                   ),
                   Text(
                     'For more information or any enquiries, Kindly fill the form.',
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.grey, fontFamily: 'Gentium'),
                   ),
                   SizedBox(
                     height: sizeAware.height * 0.02,
@@ -404,8 +424,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Full Name',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -451,8 +472,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Email Adress',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -498,8 +520,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Phone Number',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -545,8 +568,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Message',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -608,7 +632,8 @@ class _ViewCarState extends State<ViewCar> {
                             textColor: Colors.white,
                             child: new Text(
                               "Submit Message",
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(
+                                  fontSize: 20.0, fontFamily: 'Gentium'),
                             ),
                             splashColor: Colors.redAccent,
                           ),
@@ -636,27 +661,33 @@ class _ViewCarState extends State<ViewCar> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: 90,
+                width: 130,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                IconButton(
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                  child: IconButton(
+                      icon: Icon(
+                        Icons.share,
+                        size: 30,
+                      ),
+                      onPressed: () {
+                        final RenderBox box = context.findRenderObject();
+                        Share.share("${widget.car.permalink}",
+                            sharePositionOrigin:
+                                box.localToGlobal(Offset.zero) & box.size);
+                      }),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  child: IconButton(
                     icon: Icon(
-                      Icons.share,
-                      size: 35,
+                      Icons.call,
+                      size: 30,
                     ),
-                    onPressed: () {
-                      final RenderBox box = context.findRenderObject();
-                      Share.share("${widget.car.permalink}",
-                          sharePositionOrigin:
-                              box.localToGlobal(Offset.zero) & box.size);
-                    }),
-                IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: 35,
+                    onPressed: calling,
                   ),
-                  onPressed: calling,
                 ),
               ],
             ),
@@ -664,7 +695,7 @@ class _ViewCarState extends State<ViewCar> {
               child: Column(
                 children: <Widget>[
                   Container(
-                    height: sizeAware.height * 0.3,
+                    height: sizeAware.width * 0.6,
                     width: sizeAware.width,
                     child: Image.network(
                       'https://www.alainclass.com/' + widget.car.image,
@@ -682,9 +713,9 @@ class _ViewCarState extends State<ViewCar> {
         """,
                           style: {
                             "*": Style(
-                              color: Colors.white,
-                              fontSize: FontSize(sizeAware.width * 0.06),
-                            ),
+                                color: Colors.white,
+                                fontSize: FontSize(sizeAware.width * 0.06),
+                                fontFamily: 'Gentium'),
                           },
                         ),
                       ),
@@ -706,7 +737,8 @@ class _ViewCarState extends State<ViewCar> {
                                 style: TextStyle(
                                     color: Colors.red,
                                     fontSize: 25,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Gentium'),
                               ),
                             ],
                           ),
@@ -716,136 +748,168 @@ class _ViewCarState extends State<ViewCar> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: <Widget>[
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Model Year',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.model_year,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Model Year',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Exterior',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.exterior,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
                                     ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Engine',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.engine,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
+                                    Text(
+                                      widget.car.model_year,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
                                     ),
-                                  ),
-                                ],
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Exterior',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.exterior,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Engine',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.engine,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              SizedBox(
-                                width: sizeAware.width * 0.2,
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text(
+                                      'Mileage',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.mileage,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Interior',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.interior,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'
+                                          //fontSize: 18,
+                                          // fontWeight: FontWeight.bold
+                                          ),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.03,
+                                    ),
+                                    Text(
+                                      'Origin',
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                          fontFamily: 'Gentium'),
+                                    ),
+                                    SizedBox(
+                                      height: sizeAware.height * 0.02,
+                                    ),
+                                    Text(
+                                      widget.car.origin,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontFamily: 'Gentium'),
+                                    ),
+                                  ],
+                                ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Mileage',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.mileage,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Interior',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.interior,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      //fontSize: 18,
-                                      // fontWeight: FontWeight.bold
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.03,
-                                  ),
-                                  Text(
-                                    'Origin',
-                                    style: TextStyle(
-                                        color: Colors.red,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    height: sizeAware.height * 0.02,
-                                  ),
-                                  Text(
-                                    widget.car.origin,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ],
+                            ],
+                          ),
+                          Divider(
+                            color: Colors.grey[600],
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Price: ',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Gentium'),
+                              ),
+                              Text(
+                                widget.car.price ?? 'Not Avilable',
+                                style: TextStyle(
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                             ],
                           ),
@@ -866,7 +930,8 @@ class _ViewCarState extends State<ViewCar> {
                                   style: TextStyle(
                                       color: Colors.red,
                                       fontSize: 18,
-                                      fontWeight: FontWeight.bold),
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: 'Gentium'),
                                 ),
                                 Icon(
                                   Icons.arrow_drop_down,
@@ -884,9 +949,11 @@ class _ViewCarState extends State<ViewCar> {
         """,
                                 style: {
                                   "html": Style(
-                                    backgroundColor: Colors.black12,
-                                    color: Colors.white,
-                                  ),
+                                      backgroundColor: Colors.black12,
+                                      color: Colors.white,
+                                      fontSize:
+                                          FontSize(sizeAware.width * 0.05),
+                                      fontFamily: 'Gentium'),
                                 },
                               ),
                             ),
@@ -901,12 +968,12 @@ class _ViewCarState extends State<ViewCar> {
                   Text(
                     'Car Photos',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: sizeAware.width * 0.10,
-                    ),
+                        color: Colors.white,
+                        fontSize: sizeAware.width * 0.10,
+                        fontFamily: 'Gentium'),
                   ),
                   Container(
-                    height: sizeAware.height * 0.3,
+                    height: sizeAware.width * 0.5,
                     child: ManuallyControlledSlider(images: images),
                   ),
                   SizedBox(
@@ -919,14 +986,14 @@ class _ViewCarState extends State<ViewCar> {
                   Text(
                     'Enquiries',
                     style: TextStyle(
-                      color: Colors.red,
-                      fontSize: sizeAware.width * 0.05,
-                      fontWeight: FontWeight.bold,
-                    ),
+                        color: Colors.red,
+                        fontSize: sizeAware.width * 0.05,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Gentium'),
                   ),
                   Text(
                     'For more information or any enquiries, Kindly fill the form.',
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.grey, fontFamily: 'Gentium'),
                   ),
                   SizedBox(
                     height: sizeAware.height * 0.02,
@@ -941,8 +1008,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Full Name',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -988,8 +1056,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Email Adress',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -1035,8 +1104,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Phone Number',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -1082,8 +1152,9 @@ class _ViewCarState extends State<ViewCar> {
                           Text(
                             'Message',
                             style: TextStyle(
-                              color: Colors.white,
-                            ),
+                                color: Colors.white,
+                                fontSize: 17,
+                                fontFamily: 'Gentium'),
                           ),
                           SizedBox(
                             height: sizeAware.height * 0.015,
@@ -1145,7 +1216,8 @@ class _ViewCarState extends State<ViewCar> {
                             textColor: Colors.white,
                             child: new Text(
                               "Submit Message",
-                              style: TextStyle(fontSize: 20.0),
+                              style: TextStyle(
+                                  fontSize: 20.0, fontFamily: 'Gentium'),
                             ),
                             splashColor: Colors.redAccent,
                           ),

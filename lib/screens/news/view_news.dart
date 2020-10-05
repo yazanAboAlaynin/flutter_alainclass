@@ -29,18 +29,23 @@ class ViewNews extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.black,
         centerTitle: true,
-        title: Image.network(
+        title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: sizeAware.width * 0.4,
+          width: 130,
+          //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
-          IconButton(
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+            child: IconButton(
               icon: Icon(
                 Icons.call,
                 size: 40,
               ),
-              onPressed: calling)
+              onPressed: calling,
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -62,9 +67,11 @@ class ViewNews extends StatelessWidget {
         """,
                 style: {
                   "html": Style(
-                    color: Colors.white54,
-                    fontSize: FontSize(sizeAware.width * 0.05),
-                  ),
+                      color: Colors.white54,
+                      fontSize: FontSize(
+                        sizeAware.width * 0.05,
+                      ),
+                      fontFamily: 'Gentium'),
                   "img": Style(width: sizeAware.width),
                 },
               ),

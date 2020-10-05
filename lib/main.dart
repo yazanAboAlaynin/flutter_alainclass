@@ -146,7 +146,6 @@ class _AlainClassState extends State<AlainClass> {
     });
   }
 
-//test
   void _handleSetEmail() {
     if (_emailAddress == null) return;
 

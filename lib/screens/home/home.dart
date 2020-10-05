@@ -135,28 +135,36 @@ class _HomeState extends State<Home> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: 90,
+                width: 130,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: 40,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: 40,
+                    ),
+                    onPressed: calling,
                   ),
-                  onPressed: calling,
                 ),
               ],
             ),
-            drawer: Drawer(
-              child: MyDrawer(),
+            drawer: Container(
+              width: sizeAware.width,
+              child: Drawer(
+                child: MyDrawer(),
+              ),
             ),
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  //======== Carusel =================
                   Container(
-                    height: sizeAware.height * 0.3,
+                    height: sizeAware.height * 0.35,
                     child: ImageCarusel(
                       images: slider_images,
                     ),
@@ -184,8 +192,9 @@ class _HomeState extends State<Home> {
                             'Search Your Car',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                //   fontWeight: FontWeight.bold,
+                                fontFamily: 'Gentium'),
                           ),
                           Icon(
                             Icons.arrow_drop_down,
@@ -233,8 +242,8 @@ class _HomeState extends State<Home> {
                                   hint: Text(
                                     "Make",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        color: Colors.white,
+                                        fontFamily: 'Gentium'),
                                   ),
                                 ),
                               ),
@@ -271,8 +280,8 @@ class _HomeState extends State<Home> {
                                   hint: Text(
                                     "All",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        color: Colors.white,
+                                        fontFamily: 'Gentium'),
                                   ),
                                 ),
                               ),
@@ -308,8 +317,8 @@ class _HomeState extends State<Home> {
                                   hint: Text(
                                     "Year",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        color: Colors.white,
+                                        fontFamily: 'Gentium'),
                                   ),
                                 ),
                               ),
@@ -336,7 +345,8 @@ class _HomeState extends State<Home> {
                               textColor: Colors.white,
                               child: new Text(
                                 "Search",
-                                style: TextStyle(fontSize: 20.0),
+                                style: TextStyle(
+                                    fontSize: 20.0, fontFamily: 'Gentium'),
                               ),
                               splashColor: Colors.redAccent,
                             ),
@@ -353,11 +363,11 @@ class _HomeState extends State<Home> {
                     height: sizeAware.height * 0.02,
                   ),
                   Text(
-                    'New Arrivals',
+                    'Search Results',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: sizeAware.width * 0.10,
-                    ),
+                        color: Colors.white,
+                        fontSize: sizeAware.width * 0.10,
+                        fontFamily: 'Gentium'),
                   ),
                   Divider(
                     color: Colors.redAccent[700],
@@ -377,7 +387,9 @@ class _HomeState extends State<Home> {
                   Text(
                     'Latest News',
                     style: TextStyle(
-                        color: Colors.white, fontSize: sizeAware.width * 0.05),
+                        color: Colors.white,
+                        fontSize: sizeAware.width * 0.05,
+                        fontFamily: 'Gentium'),
                   ),
                   Container(
                     child: ShowNews(
@@ -417,28 +429,36 @@ class _HomeState extends State<Home> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: 90,
+                width: 130,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: 40,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: 40,
+                    ),
+                    onPressed: calling,
                   ),
-                  onPressed: calling,
                 ),
               ],
             ),
-            drawer: Drawer(
-              child: MyDrawer(),
+            drawer: Container(
+              width: sizeAware.width,
+              child: Drawer(
+                child: MyDrawer(),
+              ),
             ),
             body: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
+                  //======== Carusel =================
                   Container(
-                    height: sizeAware.height * 0.3,
+                    height: sizeAware.height * 0.35,
                     child: ImageCarusel(
                       images: slider_images,
                     ),
@@ -466,8 +486,9 @@ class _HomeState extends State<Home> {
                             'Search Your Car',
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold),
+                                fontSize: 20,
+                                //   fontWeight: FontWeight.bold,
+                                fontFamily: 'Gentium'),
                           ),
                           Icon(
                             Icons.arrow_drop_down,
@@ -515,8 +536,8 @@ class _HomeState extends State<Home> {
                                   hint: Text(
                                     "Make",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        color: Colors.white,
+                                        fontFamily: 'Gentium'),
                                   ),
                                 ),
                               ),
@@ -553,8 +574,8 @@ class _HomeState extends State<Home> {
                                   hint: Text(
                                     "All",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        color: Colors.white,
+                                        fontFamily: 'Gentium'),
                                   ),
                                 ),
                               ),
@@ -590,8 +611,8 @@ class _HomeState extends State<Home> {
                                   hint: Text(
                                     "Year",
                                     style: TextStyle(
-                                      color: Colors.white,
-                                    ),
+                                        color: Colors.white,
+                                        fontFamily: 'Gentium'),
                                   ),
                                 ),
                               ),
@@ -618,7 +639,8 @@ class _HomeState extends State<Home> {
                               textColor: Colors.white,
                               child: new Text(
                                 "Search",
-                                style: TextStyle(fontSize: 20.0),
+                                style: TextStyle(
+                                    fontSize: 20.0, fontFamily: 'Gentium'),
                               ),
                               splashColor: Colors.redAccent,
                             ),
@@ -637,9 +659,9 @@ class _HomeState extends State<Home> {
                   Text(
                     'New Arrivals',
                     style: TextStyle(
-                      color: Colors.white,
-                      fontSize: sizeAware.width * 0.10,
-                    ),
+                        color: Colors.white,
+                        fontSize: sizeAware.width * 0.10,
+                        fontFamily: 'Gentium'),
                   ),
                   Divider(
                     color: Colors.redAccent[700],
@@ -659,7 +681,9 @@ class _HomeState extends State<Home> {
                   Text(
                     'Latest News',
                     style: TextStyle(
-                        color: Colors.white, fontSize: sizeAware.width * 0.05),
+                        color: Colors.white,
+                        fontSize: sizeAware.width * 0.05,
+                        fontFamily: 'Gentium'),
                   ),
                   Container(
                     child: ShowNews(

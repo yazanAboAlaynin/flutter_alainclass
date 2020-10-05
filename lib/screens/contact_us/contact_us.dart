@@ -42,21 +42,27 @@ class ContactUs extends StatelessWidget {
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: 90,
+          width: 130,
           //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.call,
-              size: 40,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+            child: IconButton(
+              icon: Icon(
+                Icons.call,
+                size: 40,
+              ),
+              onPressed: calling,
             ),
-            onPressed: calling,
           ),
         ],
       ),
-      drawer: Drawer(
-        child: MyDrawer(),
+      drawer: Container(
+        width: sizeAware.width,
+        child: Drawer(
+          child: MyDrawer(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

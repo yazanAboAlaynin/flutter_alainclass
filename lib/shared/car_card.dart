@@ -1,5 +1,6 @@
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/screens/view_car/view_car.dart';
+import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';
@@ -12,23 +13,17 @@ class CarCard extends StatelessWidget {
     if (type == "New") {
       return Text(
         'New',
-        style: TextStyle(
-          color: Colors.red,
-        ),
+        style: TextStyle(color: Colors.red, fontFamily: 'Gentium'),
       );
     } else if (type == "Used") {
       return Text(
         'Used',
-        style: TextStyle(
-          color: Colors.grey,
-        ),
+        style: TextStyle(color: Colors.grey, fontFamily: 'Gentium'),
       );
     } else {
       return Text(
         'Sold',
-        style: TextStyle(
-          color: Colors.grey,
-        ),
+        style: TextStyle(color: Colors.grey, fontFamily: 'Gentium'),
       );
     }
   }
@@ -66,13 +61,13 @@ class CarCard extends StatelessWidget {
                 Container(
                   child: Html(
                     data: """
-          ${car.title}
-        """,
+      ${car.title}
+    """,
                     style: {
                       "*": Style(
-                        color: Colors.white,
-                        fontSize: FontSize(sizeAware.width * 0.04),
-                      ),
+                          color: Colors.white,
+                          fontSize: FontSize(sizeAware.width * 0.04),
+                          fontFamily: 'Gentium'),
                     },
                   ),
                 ),

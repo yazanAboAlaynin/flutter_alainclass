@@ -35,21 +35,27 @@ class AboutUs extends StatelessWidget {
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: 90,
+          width: 130,
           //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.call,
-              size: 40,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+            child: IconButton(
+              icon: Icon(
+                Icons.call,
+                size: 40,
+              ),
+              onPressed: calling,
             ),
-            onPressed: calling,
           ),
         ],
       ),
-      drawer: Drawer(
-        child: MyDrawer(),
+      drawer: Container(
+        width: sizeAware.width,
+        child: Drawer(
+          child: MyDrawer(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -68,7 +74,9 @@ class AboutUs extends StatelessWidget {
             Text(
               'About Us',
               style: TextStyle(
-                  color: Colors.white, fontSize: sizeAware.width * 0.07),
+                  color: Colors.white,
+                  fontSize: sizeAware.width * 0.07,
+                  fontFamily: 'Gentium'),
             ),
             Container(
                 width: sizeAware.width * 0.35,
@@ -81,7 +89,9 @@ class AboutUs extends StatelessWidget {
             Text(
               "Welcome to Al Ain Class Motors, the world’s most exclusive automobile showroom.\n\nOver 20 years experience in the exotic and luxury car business. Our mission is to provide our customers worldwide the best selection of new and pre owned vehicles available in the market.\n\nAs a car enthusiast and collector, Mr. Abdulla Al ketbi started trading luxury cars in the year 1992. He mainly started importing Mercedes Benz from Germany and selling to close relatives and friends. By 1995 the first Alain Class Motors Showroom was open in his city in Alain, U.A.E.\n\nFor over 20 years we have provided our discerning customers with exotic and luxury vehicles. Our wide selection of new and pre-owned cars include the world’s most exciting and exclusive brands.\n\nWe are renowned for our range, always maintaining 100 outstanding automobiles in stock at any given time. Our main aim is to establish long term business relationships with our customers by providing the best quality vehicles, excellent after-sale service, value for money and assistance with delivery arrangements to any port or airport worldwide.\n\nWe invite you to browse through our website for new and pre owned cars or visit us at any of our branches.",
               style: TextStyle(
-                  color: Colors.white, fontSize: sizeAware.width * 0.04),
+                  color: Colors.white,
+                  fontSize: sizeAware.width * 0.04,
+                  fontFamily: 'Gentium'),
             ),
             SizedBox(
               height: sizeAware.height * 0.02,

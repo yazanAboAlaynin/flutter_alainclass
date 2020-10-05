@@ -138,21 +138,27 @@ class _SellCarState extends State<SellCar> {
                 title: Image.asset(
                   'assets/images/black_logo.png',
                   fit: BoxFit.cover,
-                  width: 90,
+                  width: 130,
                   //height: sizeAware.height * 0.01,
                 ),
                 actions: <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.call,
-                      size: 40,
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.call,
+                        size: 40,
+                      ),
+                      onPressed: calling,
                     ),
-                    onPressed: calling,
                   ),
                 ],
               ),
-              drawer: Drawer(
-                child: MyDrawer(),
+              drawer: Container(
+                width: sizeAware.width,
+                child: Drawer(
+                  child: MyDrawer(),
+                ),
               ),
               body: SingleChildScrollView(
                 child: Column(
@@ -171,9 +177,9 @@ class _SellCarState extends State<SellCar> {
                       child: Text(
                         'Sell Your Car',
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: sizeAware.width * 0.05,
-                        ),
+                            color: Colors.white,
+                            fontSize: sizeAware.width * 0.05,
+                            fontFamily: 'Gentium'),
                       ),
                     ),
                     Padding(
@@ -191,9 +197,9 @@ class _SellCarState extends State<SellCar> {
                             "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
                             "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: sizeAware.width * 0.04,
-                        ),
+                            color: Colors.white,
+                            fontSize: sizeAware.width * 0.04,
+                            fontFamily: 'Gentium'),
                       ),
                     ),
                     Container(
@@ -212,7 +218,8 @@ class _SellCarState extends State<SellCar> {
                               Center(
                                 child: Text(
                                   'Submit your car details',
-                                  style: TextStyle(color: Colors.red),
+                                  style: TextStyle(
+                                      color: Colors.red, fontFamily: 'Gentium'),
                                 ),
                               ),
                               SizedBox(
@@ -231,7 +238,9 @@ class _SellCarState extends State<SellCar> {
                                     ),
                                     Text(
                                       'Add Car images',
-                                      style: TextStyle(color: Colors.red),
+                                      style: TextStyle(
+                                          color: Colors.red,
+                                          fontFamily: 'Gentium'),
                                     ),
                                   ],
                                 ),
@@ -249,8 +258,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Full Name*',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -281,8 +289,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Phone Number',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -313,8 +320,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Email Adress*',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -345,8 +351,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Make',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -377,8 +382,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Car Model',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -409,8 +413,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Year',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -441,8 +444,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Milage',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -473,8 +475,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Price',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -505,8 +506,7 @@ class _SellCarState extends State<SellCar> {
                               Text(
                                 'Notes',
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                               SizedBox(
                                 height: sizeAware.height * 0.015,
@@ -591,7 +591,7 @@ class _SellCarState extends State<SellCar> {
                 title: Image.asset(
                   'assets/images/black_logo.png',
                   fit: BoxFit.cover,
-                  width: 90,
+                  width: 130,
                   //height: sizeAware.height * 0.01,
                 ),
                 actions: <Widget>[
@@ -1039,7 +1039,7 @@ class _SellCarState extends State<SellCar> {
                 title: Image.asset(
                   'assets/images/black_logo.png',
                   fit: BoxFit.cover,
-                  width: 90,
+                  width: 130,
                   //height: sizeAware.height * 0.01,
                 ),
                 actions: <Widget>[

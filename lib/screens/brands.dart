@@ -45,9 +45,7 @@ class Brands extends StatelessWidget {
             child: Container(
               child: Text(
                 brands[sortedKeys[i]],
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                style: TextStyle(color: Colors.white, fontFamily: 'Gentium'),
               ),
             ),
           ));
@@ -67,9 +65,9 @@ class Brands extends StatelessWidget {
                 child: Text(
                   String.fromCharCode(c),
                   style: TextStyle(
-                    color: Colors.red,
-                    fontSize: sizeAware.width * 0.05,
-                  ),
+                      color: Colors.red,
+                      fontSize: sizeAware.width * 0.05,
+                      fontFamily: 'Gentium'),
                 ),
               ),
               SizedBox(
@@ -103,21 +101,27 @@ class Brands extends StatelessWidget {
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: sizeAware.width * 0.4,
+          width: 130,
           //height: sizeAware.height * 0.01,
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(
-              Icons.call,
-              size: sizeAware.width * 0.1,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+            child: IconButton(
+              icon: Icon(
+                Icons.call,
+                size: 40,
+              ),
+              onPressed: calling,
             ),
-            onPressed: calling,
-          )
+          ),
         ],
       ),
-      drawer: Drawer(
-        child: MyDrawer(),
+      drawer: Container(
+        width: sizeAware.width,
+        child: Drawer(
+          child: MyDrawer(),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(

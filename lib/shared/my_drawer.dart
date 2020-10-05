@@ -101,10 +101,12 @@ class _MyDrawerState extends State<MyDrawer> {
           preferredSize: Size.fromHeight(1.0),
         ),
         backgroundColor: Colors.black,
+        centerTitle: true,
         title: Image.asset(
           'assets/images/black_logo.png',
           fit: BoxFit.cover,
-          width: 100,
+          width: 130,
+          //height: sizeAware.height * 0.01,
         ),
       ),
       body: SingleChildScrollView(
@@ -125,9 +127,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'Home',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -147,9 +149,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'Inventory',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -175,9 +177,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'Brands',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -197,9 +199,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'News and Events',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -219,9 +221,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'Sell your car',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -241,9 +243,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'About Us',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -263,9 +265,9 @@ class _MyDrawerState extends State<MyDrawer> {
                     child: Text(
                       'Contact Us',
                       style: TextStyle(
-                        color: Colors.white,
-                        fontSize: sizeAware.width * 0.05,
-                      ),
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
                     ),
                   ),
                 ),
@@ -293,8 +295,9 @@ class _MyDrawerState extends State<MyDrawer> {
                         'Search Your Car',
                         style: TextStyle(
                             color: Colors.white,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold),
+                            fontSize: 20,
+                            //  fontWeight: FontWeight.bold,
+                            fontFamily: 'Gentium'),
                       ),
                       Icon(
                         Icons.arrow_drop_down,
@@ -342,8 +345,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               hint: Text(
                                 "Make",
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                             ),
                           ),
@@ -380,8 +382,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               hint: Text(
                                 "All",
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                             ),
                           ),
@@ -418,8 +419,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               hint: Text(
                                 "Year",
                                 style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                                    color: Colors.white, fontFamily: 'Gentium'),
                               ),
                             ),
                           ),
@@ -440,7 +440,7 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                             );
                           },
-                          //   height: sizeAware.height * 0.07,
+                          height: sizeAware.height * 0.09,
                           minWidth: sizeAware.width,
                           shape: ContinuousRectangleBorder(
                             borderRadius: BorderRadius.circular(8),
@@ -449,7 +449,8 @@ class _MyDrawerState extends State<MyDrawer> {
                           textColor: Colors.white,
                           child: new Text(
                             "Search",
-                            style: TextStyle(fontSize: 20.0),
+                            style: TextStyle(
+                                fontSize: 20.0, fontFamily: 'Gentium'),
                           ),
                           splashColor: Colors.redAccent,
                         ),
@@ -459,7 +460,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 ),
               ),
               SizedBox(
-                height: sizeAware.height * 0.02,
+                height: sizeAware.height * 0.04,
               ),
             ],
           ),

@@ -10,8 +10,11 @@ class ImageCarusel extends StatelessWidget {
     List<NetworkImage> list = [];
     for (int i = 0; i < images.length; i++) {
       list.add(
-        NetworkImage('https://www.alainclass.com/' + images[i]),
+        NetworkImage(
+          'https://www.alainclass.com/' + images[i],
+        ),
       );
+      print('https://www.alainclass.com/' + images[i]);
     }
     return Carousel(
       boxFit: BoxFit.contain,
@@ -19,7 +22,7 @@ class ImageCarusel extends StatelessWidget {
       autoplay: true,
       animationCurve: Curves.fastOutSlowIn,
       autoplayDuration: Duration(
-        milliseconds: 5000,
+        milliseconds: 10000,
       ),
       animationDuration: Duration(
         milliseconds: 1000,

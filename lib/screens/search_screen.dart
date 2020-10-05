@@ -1,9 +1,12 @@
 import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
+import 'package:alainclass/shared/car_card.dart';
 import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:alainclass/shared/show_cars.dart';
+import 'package:animated_list_view_scroll/animated_list_view_scroll.dart';
+import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -33,6 +36,49 @@ class _SearchScreenState extends State<SearchScreen> {
     }
   }
 
+  final options = LiveOptions(
+    // Start animation after (default zero)
+    delay: Duration(milliseconds: 500),
+
+    // Show each item through (default 250)
+    showItemInterval: Duration(milliseconds: 100),
+
+    // Animation duration (default 250)
+    showItemDuration: Duration(milliseconds: 500),
+
+    // Animations starts at 0.05 visible
+    // item fraction in sight (default 0.025)
+    visibleFraction: 0.03,
+
+    // Repeat the animation of the appearance
+    // when scrolling in the opposite direction (default false)
+    // To get the effect as in a showcase for ListView, set true
+    reAnimateOnVisibility: false,
+  );
+// Build animated item (helper for all examples)
+  Widget buildAnimatedItem(
+    BuildContext context,
+    int index,
+    Animation<double> animation,
+  ) =>
+      // For example wrap with fade transition
+      FadeTransition(
+        opacity: Tween<double>(
+          begin: 0,
+          end: 1,
+        ).animate(animation),
+        // And slide transition
+        child: SlideTransition(
+          position: Tween<Offset>(
+            begin: Offset(0, -0.1),
+            end: Offset.zero,
+          ).animate(animation),
+          // Paste you Widget
+          child: CarCard(
+            car: search_res.elementAt(index),
+          ),
+        ),
+      );
   final HomeRepository homeRepository = HomeRepository(
     api: Api(
       httpClient: http.Client(),
@@ -83,35 +129,37 @@ class _SearchScreenState extends State<SearchScreen> {
               title: Image.asset(
                 'assets/images/black_logo.png',
                 fit: BoxFit.cover,
-                width: 90,
+                width: 130,
                 //height: sizeAware.height * 0.01,
               ),
               actions: <Widget>[
-                IconButton(
-                  icon: Icon(
-                    Icons.call,
-                    size: 40,
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.call,
+                      size: 40,
+                    ),
+                    onPressed: calling,
                   ),
-                  onPressed: calling,
                 ),
               ],
             ),
-            drawer: Drawer(
-              child: MyDrawer(),
-            ),
-            body: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  ShowCars(
-                    cars: search_res,
-                  ),
-                  MyFooter(),
-                ],
+            drawer: Container(
+              width: sizeAware.width,
+              child: Drawer(
+                child: MyDrawer(),
               ),
+            ),
+            body: LiveList.options(
+              options: options,
+              itemBuilder: buildAnimatedItem,
+              // scrollDirection: Axis.horizontal,
+              itemCount: search_res.length,
             ),
           );
         }
+
         if (state is HomeLoadFailure) {
           return Scaffold(
             backgroundColor: Colors.black,
