@@ -17,7 +17,7 @@ class ImageCarusel extends StatelessWidget {
       print('https://www.alainclass.com/' + images[i]);
     }
     return Carousel(
-      boxFit: BoxFit.contain,
+      boxFit: BoxFit.cover,
       images: list,
       autoplay: true,
       animationCurve: Curves.fastOutSlowIn,

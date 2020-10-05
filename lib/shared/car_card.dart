@@ -49,13 +49,16 @@ class CarCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Container(
-                  height: sizeAware.width * 0.55,
-                  width: sizeAware.width,
-                  child: Image.network(
-                    'https://www.alainclass.com/' + car.image,
-                    fit: BoxFit.cover,
+                Hero(
+                  tag: car.id,
+                  child: Container(
+                    height: sizeAware.width * 0.55,
                     width: sizeAware.width,
+                    child: Image.network(
+                      'https://www.alainclass.com/' + car.image,
+                      fit: BoxFit.cover,
+                      width: sizeAware.width,
+                    ),
                   ),
                 ),
                 Container(

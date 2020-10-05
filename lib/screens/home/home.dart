@@ -220,7 +220,9 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              // height: sizeAware.height * 0.08,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -258,7 +260,9 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              // height: sizeAware.height * 0.07,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -296,7 +300,9 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              // height: sizeAware.height * 0.07,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -336,7 +342,9 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              height: sizeAware.height * 0.09,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               minWidth: sizeAware.width,
                               shape: ContinuousRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),
@@ -363,7 +371,7 @@ class _HomeState extends State<Home> {
                     height: sizeAware.height * 0.02,
                   ),
                   Text(
-                    'Search Results',
+                    'New Arrivals',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: sizeAware.width * 0.10,
@@ -514,7 +522,9 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              // height: sizeAware.height * 0.08,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -552,7 +562,9 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              // height: sizeAware.height * 0.07,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -590,7 +602,9 @@ class _HomeState extends State<Home> {
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(6)),
                               ),
-                              // height: sizeAware.height * 0.07,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: DropdownButton<String>(
@@ -630,7 +644,9 @@ class _HomeState extends State<Home> {
                                   ),
                                 );
                               },
-                              height: sizeAware.height * 0.09,
+                              height: sizeAware.height >= sizeAware.width
+                                  ? sizeAware.height * 0.07
+                                  : sizeAware.width * 0.07,
                               minWidth: sizeAware.width,
                               shape: ContinuousRectangleBorder(
                                 borderRadius: BorderRadius.circular(8),

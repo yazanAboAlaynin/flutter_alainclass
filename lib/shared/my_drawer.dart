@@ -318,14 +318,17 @@ class _MyDrawerState extends State<MyDrawer> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 8, vertical: 8),
                         child: Container(
+                          height: sizeAware.height >= sizeAware.width
+                              ? sizeAware.height * 0.07
+                              : sizeAware.width * 0.07,
                           decoration: BoxDecoration(
                             color: Colors.grey[800],
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          //  height: sizeAware.height * 0.07,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
+                              // itemHeight: sizeAware.height * 0.07,
                               icon: Icon(Icons.keyboard_arrow_down),
                               isExpanded: true,
                               iconDisabledColor: Colors.white,
@@ -357,9 +360,11 @@ class _MyDrawerState extends State<MyDrawer> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.grey[800],
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          //   height: sizeAware.height * 0.07,
+                          height: sizeAware.height >= sizeAware.width
+                              ? sizeAware.height * 0.07
+                              : sizeAware.width * 0.07,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
@@ -394,9 +399,11 @@ class _MyDrawerState extends State<MyDrawer> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.grey[800],
-                            borderRadius: BorderRadius.all(Radius.circular(6)),
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
                           ),
-                          //      height: sizeAware.height * 0.07,
+                          height: sizeAware.height >= sizeAware.width
+                              ? sizeAware.height * 0.07
+                              : sizeAware.width * 0.07,
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: DropdownButton<String>(
@@ -440,10 +447,12 @@ class _MyDrawerState extends State<MyDrawer> {
                               ),
                             );
                           },
-                          height: sizeAware.height * 0.09,
+                          height: sizeAware.height >= sizeAware.width
+                              ? sizeAware.height * 0.07
+                              : sizeAware.width * 0.07,
                           minWidth: sizeAware.width,
                           shape: ContinuousRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(25),
                           ),
                           color: Colors.red,
                           textColor: Colors.white,

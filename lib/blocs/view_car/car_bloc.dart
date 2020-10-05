@@ -10,7 +10,7 @@ class CarBloc extends Bloc<CarEvent, CarState> {
   @override
   Stream<CarState> mapEventToState(CarEvent event) async* {
     if (event is CarRequested) {
-      yield CarLoadInProgress();
+      yield ImagesLoadInProgress();
       try {
         final List car_page = await carRepository.getCarPage(event.id);
         yield CarLoadSuccess(
