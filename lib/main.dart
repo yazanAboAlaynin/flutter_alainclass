@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:alainclass/repositories/shared_pref.dart';
 import 'package:alainclass/screens/start_video.dart';
 import 'package:bloc/bloc.dart';
 
@@ -9,6 +12,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 import 'blocs/simple_bloc_observer.dart';
+import 'package:alainclass/models/notification.dart' as noti;
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -64,12 +68,16 @@ class _AlainClassState extends State<AlainClass> {
       OSiOSSettings.promptBeforeOpeningPushUrl: true
     };
 
-    // OneSignal.shared.setNotificationReceivedHandler((notification) {
-    //   this.setState(() {
-    //     _debugLabelString =
-    //         "Received notification: \n${notification.jsonRepresentation().replaceAll("\\n", "\n")}";
-    //   });
-    // });
+    OneSignal.shared.setNotificationReceivedHandler((notification) {
+      this.setState(() {
+        _debugLabelString =
+            "Received notification: \n${notification.jsonRepresentation().replaceAll("\\n", "\n")}";
+      });
+      var msg = notification.payload;
+      //save message
+      noti.Notification notif = noti.Notification.fromJson(msg);
+      SharedPrefs.saveNotification(notif);
+    });
 
     // OneSignal.shared
     //     .setNotificationOpenedHandler((OSNotificationOpenedResult result) {

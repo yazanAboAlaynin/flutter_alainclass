@@ -6,6 +6,7 @@ import 'package:alainclass/screens/home/home.dart';
 import 'package:alainclass/screens/inventory.dart';
 import 'package:alainclass/screens/news/news_events.dart';
 import 'package:alainclass/screens/news/view_news.dart';
+import 'package:alainclass/screens/notifications/notifications.dart';
 import 'package:alainclass/screens/search_screen.dart';
 import 'package:alainclass/screens/sell_car/sell_car.dart';
 import 'package:flutter/material.dart';
@@ -126,6 +127,28 @@ class _MyDrawerState extends State<MyDrawer> {
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Home',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: sizeAware.width * 0.05,
+                          fontFamily: 'Gentium'),
+                    ),
+                  ),
+                ),
+              ),
+              Divider(
+                color: Colors.grey,
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Notifications()));
+                },
+                child: Container(
+                  width: sizeAware.width,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'Notifications',
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: sizeAware.width * 0.05,
