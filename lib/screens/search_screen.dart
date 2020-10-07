@@ -2,10 +2,7 @@ import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/shared/car_card.dart';
-import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/my_drawer.dart';
-import 'package:alainclass/shared/show_cars.dart';
-import 'package:animated_list_view_scroll/animated_list_view_scroll.dart';
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -134,7 +131,7 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               actions: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
                   child: IconButton(
                     icon: Icon(
                       Icons.call,
@@ -151,12 +148,18 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: MyDrawer(),
               ),
             ),
-            body: LiveList.options(
-              options: options,
-              itemBuilder: buildAnimatedItem,
-              // scrollDirection: Axis.horizontal,
-              itemCount: search_res.length,
-            ),
+            body: search_res.length == 0
+                ? Center(
+                    child: Text(
+                    'No Results',
+                    style: TextStyle(color: Colors.white, fontSize: 25),
+                  ))
+                : LiveList.options(
+                    options: options,
+                    itemBuilder: buildAnimatedItem,
+                    // scrollDirection: Axis.horizontal,
+                    itemCount: search_res.length,
+                  ),
           );
         }
 

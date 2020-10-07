@@ -106,7 +106,7 @@ class Brands extends StatelessWidget {
         ),
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+            padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
             child: IconButton(
               icon: Icon(
                 Icons.call,

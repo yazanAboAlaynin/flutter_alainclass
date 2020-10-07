@@ -1,6 +1,5 @@
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/screens/view_car/view_car.dart';
-import 'package:delayed_display/delayed_display.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_html/style.dart';

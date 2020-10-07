@@ -119,6 +119,7 @@ class _HomeState extends State<Home> {
         }
         if (state is SearchLoadSuccess) {
           new_arrivals = state.cars;
+
           return Scaffold(
             key: _scaffoldKey,
             backgroundColor: Colors.black,
@@ -140,7 +141,7 @@ class _HomeState extends State<Home> {
               ),
               actions: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
                   child: IconButton(
                     icon: Icon(
                       Icons.call,
@@ -334,6 +335,9 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.all(8.0),
                             child: MaterialButton(
                               onPressed: () {
+                                setState(() {
+                                  showDesc = false;
+                                });
                                 homeBloc.add(
                                   SearchRequested(
                                     brand: brand,
@@ -371,7 +375,7 @@ class _HomeState extends State<Home> {
                     height: sizeAware.height * 0.02,
                   ),
                   Text(
-                    'New Arrivals',
+                    'Search Results',
                     style: TextStyle(
                         color: Colors.white,
                         fontSize: sizeAware.width * 0.10,
@@ -381,12 +385,17 @@ class _HomeState extends State<Home> {
                     color: Colors.redAccent[700],
                     height: sizeAware.height * 0.02,
                   ),
-                  Container(
-                    //height: sizeAware.height * 0.44,
-                    child: ShowCars(
-                      cars: new_arrivals,
-                    ),
-                  ),
+                  new_arrivals.length == 0
+                      ? Text(
+                          'No Results',
+                          style: TextStyle(color: Colors.white, fontSize: 20),
+                        )
+                      : Container(
+                          //height: sizeAware.height * 0.44,
+                          child: ShowCars(
+                            cars: new_arrivals,
+                          ),
+                        ),
                   SizedBox(height: sizeAware.height * 0.04),
                   Divider(
                     color: Colors.redAccent[700],
@@ -442,7 +451,7 @@ class _HomeState extends State<Home> {
               ),
               actions: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
+                  padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
                   child: IconButton(
                     icon: Icon(
                       Icons.call,
@@ -636,6 +645,9 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.all(8.0),
                             child: MaterialButton(
                               onPressed: () {
+                                setState(() {
+                                  showDesc = false;
+                                });
                                 homeBloc.add(
                                   SearchRequested(
                                     brand: brand,

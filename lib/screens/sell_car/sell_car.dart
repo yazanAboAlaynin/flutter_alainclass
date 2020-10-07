@@ -118,1359 +118,1430 @@ class _SellCarState extends State<SellCar> {
       ),
       contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
     );
-    return BlocBuilder(
-        cubit: sellCarBloc,
-        builder: (context, state) {
-          if (state is SellCarInitial) {
-            return Scaffold(
-              key: _scaffoldKeyy,
-              backgroundColor: Colors.black,
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    size: 45,
-                  ),
-                  onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
+    return BlocListener(
+      cubit: sellCarBloc,
+      listenWhen: (previous, current) {
+        if (current is SellCarFinished) {
+          return true;
+        }
+      },
+      listener: (context, state) {
+        if (state is SellCarFinished) {
+          showDialog<void>(
+            context: context,
+            barrierDismissible: true,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  'Alain Class ',
                 ),
-                backgroundColor: Colors.black,
-                centerTitle: true,
-                title: Image.asset(
-                  'assets/images/black_logo.png',
-                  fit: BoxFit.cover,
-                  width: 130,
-                  //height: sizeAware.height * 0.01,
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: <Widget>[
+                      Text('Your car submitted successfuly\nthank you.'),
+                    ],
+                  ),
                 ),
                 actions: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 2, 4, 2),
-                    child: IconButton(
-                      icon: Icon(
-                        Icons.call,
-                        size: 40,
-                      ),
-                      onPressed: calling,
-                    ),
+                  FlatButton(
+                    child: Text('Ok'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
                 ],
-              ),
-              drawer: Container(
-                width: sizeAware.width,
-                child: Drawer(
-                  child: MyDrawer(),
+              );
+            },
+          );
+        }
+      },
+      child: BlocBuilder(
+          cubit: sellCarBloc,
+          builder: (context, state) {
+            if (state is SellCarInitial) {
+              return Scaffold(
+                key: _scaffoldKeyy,
+                backgroundColor: Colors.black,
+                appBar: AppBar(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      size: 45,
+                    ),
+                    onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
+                  ),
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
+                  title: Image.asset(
+                    'assets/images/black_logo.png',
+                    fit: BoxFit.cover,
+                    width: 130,
+                    //height: sizeAware.height * 0.01,
+                  ),
+                  actions: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.call,
+                          size: 40,
+                        ),
+                        onPressed: calling,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: sizeAware.width,
-                      height: sizeAware.height * 0.3,
-                      child: Image.asset(
-                        'assets/images/cover2.jpg',
-                        fit: BoxFit.cover,
+                drawer: Container(
+                  width: sizeAware.width,
+                  child: Drawer(
+                    child: MyDrawer(),
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: sizeAware.width,
+                        height: sizeAware.height * 0.3,
+                        child: Image.asset(
+                          'assets/images/cover2.jpg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Sell Your Car',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: sizeAware.width * 0.05,
-                            fontFamily: 'Gentium'),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Sell Your Car',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: sizeAware.width * 0.05,
+                              fontFamily: 'Gentium'),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: sizeAware.height * 0.006,
-                        width: sizeAware.width * 0.3,
-                        color: Colors.red,
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: sizeAware.height * 0.006,
+                          width: sizeAware.width * 0.3,
+                          color: Colors.red,
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "We are also the perfect place to sell your car and welcome your enquiry. You can be assured of premium service and that your sale is in the very best hands." +
-                            "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
-                            "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: sizeAware.width * 0.04,
-                            fontFamily: 'Gentium'),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "We are also the perfect place to sell your car and welcome your enquiry. You can be assured of premium service and that your sale is in the very best hands." +
+                              "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
+                              "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: sizeAware.width * 0.04,
+                              fontFamily: 'Gentium'),
+                        ),
                       ),
-                    ),
-                    Container(
-                      color: Color.fromRGBO(48, 52, 56, 1.0),
-                      width: sizeAware.width,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              Center(
-                                child: Text(
-                                  'Submit your car details',
+                      Container(
+                        color: Color.fromRGBO(48, 52, 56, 1.0),
+                        width: sizeAware.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                Center(
+                                  child: Text(
+                                    'Submit your car details',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontFamily: 'Gentium'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                InkWell(
+                                  onTap: loadAssets,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.add_circle,
+                                        color: Colors.red,
+                                      ),
+                                      SizedBox(
+                                        width: sizeAware.width * 0.02,
+                                      ),
+                                      Text(
+                                        'Add Car images',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontFamily: 'Gentium'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: images.length == 0 ? false : true,
+                                  child: Container(
+                                    height: sizeAware.height * 0.3,
+                                    child: MySlider(images: images),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                Text(
+                                  'Full Name*',
                                   style: TextStyle(
-                                      color: Colors.red, fontFamily: 'Gentium'),
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              InkWell(
-                                onTap: loadAssets,
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.add_circle,
-                                      color: Colors.red,
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                    SizedBox(
-                                      width: sizeAware.width * 0.02,
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a name' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _name = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Phone Number',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                    Text(
-                                      'Add Car images',
-                                      style: TextStyle(
-                                          color: Colors.red,
-                                          fontFamily: 'Gentium'),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a number' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _phone = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Email Adress*',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
                                     ),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: images.length == 0 ? false : true,
-                                child: Container(
-                                  height: sizeAware.height * 0.3,
-                                  child: MySlider(images: images),
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              Text(
-                                'Full Name*',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter an email' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _email = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a name' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _name = val;
-                                    });
-                                  },
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Phone Number',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                Text(
+                                  'Make',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter make' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _make = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a number' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _phone = val;
-                                    });
-                                  },
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Email Adress*',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                Text(
+                                  'Car Model',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter model' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _model = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter an email' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _email = val;
-                                    });
-                                  },
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Make',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                Text(
+                                  'Year',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a year' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _year = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter make' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _make = val;
-                                    });
-                                  },
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Car Model',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                Text(
+                                  'Milage',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter millage' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _millage = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter model' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _model = val;
-                                    });
-                                  },
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Year',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                Text(
+                                  'Price',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a price' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _price = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a year' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _year = val;
-                                    });
-                                  },
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
                                 ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Milage',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                Text(
+                                  'Notes',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  height: sizeAware.height * 0.12,
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    expands: true,
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: null,
+                                    decoration: inputDecoration,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _notes = val;
+                                      });
+                                    },
                                   ),
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter millage' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _millage = val;
-                                    });
+                                SizedBox(height: sizeAware.height * 0.02),
+                                MaterialButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState.validate()) {
+                                      var data = {
+                                        'name': _name,
+                                        'email': _email,
+                                        'number': _phone,
+                                        'make': _make,
+                                        'model': _model,
+                                        'year': _year,
+                                        'millage': _millage,
+                                        'price': _price,
+                                        'notes': _notes
+                                      };
+                                      sellCarBloc.add(SellCarRequested(
+                                          assets: images, data: data));
+                                    }
                                   },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Price',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
+                                  height: sizeAware.height * 0.07,
+                                  minWidth: sizeAware.width,
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
                                   ),
+                                  color: Colors.red,
+                                  textColor: Colors.white,
+                                  child: new Text(
+                                    "Submit Details",
+                                    style: TextStyle(fontSize: 20.0),
+                                  ),
+                                  splashColor: Colors.redAccent,
                                 ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a price' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _price = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Notes',
-                                style: TextStyle(
-                                    color: Colors.white, fontFamily: 'Gentium'),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                height: sizeAware.height * 0.12,
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  expands: true,
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  decoration: inputDecoration,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _notes = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: sizeAware.height * 0.02),
-                              MaterialButton(
-                                onPressed: () {
-                                  if (_formKey.currentState.validate()) {
-                                    var data = {
-                                      'name': _name,
-                                      'email': _email,
-                                      'number': _phone,
-                                      'make': _make,
-                                      'model': _model,
-                                      'year': _year,
-                                      'millage': _millage,
-                                      'price': _price,
-                                      'notes': _notes
-                                    };
-                                    sellCarBloc.add(SellCarRequested(
-                                        assets: images, data: data));
-                                  }
-                                },
-                                height: sizeAware.height * 0.07,
-                                minWidth: sizeAware.width,
-                                shape: ContinuousRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                color: Colors.red,
-                                textColor: Colors.white,
-                                child: new Text(
-                                  "Submit Details",
-                                  style: TextStyle(fontSize: 20.0),
-                                ),
-                                splashColor: Colors.redAccent,
-                              ),
-                              SizedBox(height: sizeAware.height * 0.035),
-                            ],
+                                SizedBox(height: sizeAware.height * 0.035),
+                              ],
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }
-          if (state is SellCarLoadInProgress) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (state is SellCarFinished) {
-            return Scaffold(
-              backgroundColor: Colors.black,
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    size: 45,
+                    ],
                   ),
-                  onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
                 ),
+              );
+            }
+            if (state is SellCarLoadInProgress) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+            if (state is SellCarFinished) {
+              images = [];
+              return Scaffold(
+                key: _scaffoldKeyy,
                 backgroundColor: Colors.black,
-                centerTitle: true,
-                title: Image.asset(
-                  'assets/images/black_logo.png',
-                  fit: BoxFit.cover,
-                  width: 130,
-                  //height: sizeAware.height * 0.01,
-                ),
-                actions: <Widget>[
-                  IconButton(
+                appBar: AppBar(
+                  leading: IconButton(
                     icon: Icon(
-                      Icons.call,
-                      size: 40,
+                      Icons.menu,
+                      size: 45,
                     ),
-                    onPressed: calling,
+                    onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
                   ),
-                ],
-              ),
-              drawer: Drawer(
-                child: MyDrawer(),
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: sizeAware.width,
-                      height: sizeAware.height * 0.3,
-                      child: Image.asset(
-                        'assets/images/cover2.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
+                  title: Image.asset(
+                    'assets/images/black_logo.png',
+                    fit: BoxFit.cover,
+                    width: 130,
+                    //height: sizeAware.height * 0.01,
+                  ),
+                  actions: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Sell Your Car',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: sizeAware.width * 0.05,
+                      padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.call,
+                          size: 40,
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: sizeAware.height * 0.006,
-                        width: sizeAware.width * 0.3,
-                        color: Colors.red,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "We are also the perfect place to sell your car and welcome your enquiry. You can be assured of premium service and that your sale is in the very best hands." +
-                            "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
-                            "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: sizeAware.width * 0.04,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: Color.fromRGBO(48, 52, 56, 1.0),
-                      width: sizeAware.width,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              Center(
-                                child: Text(
-                                  'Submit your car details',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              InkWell(
-                                onTap: loadAssets,
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.add_circle,
-                                      color: Colors.red,
-                                    ),
-                                    SizedBox(
-                                      width: sizeAware.width * 0.02,
-                                    ),
-                                    Text(
-                                      'Add Car images',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: images.length == 0 ? false : true,
-                                child: Container(
-                                  height: sizeAware.height * 0.3,
-                                  child: MySlider(images: images),
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              Text(
-                                'Full Name*',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a name' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _name = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Phone Number',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a number' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _phone = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Email Adress*',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter an email' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _email = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Make',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter make' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _make = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Car Model',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter model' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _model = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Year',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a year' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _year = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Milage',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter millage' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _millage = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Price',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a price' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _price = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Notes',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                height: sizeAware.height * 0.12,
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  expands: true,
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  decoration: inputDecoration,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _notes = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: sizeAware.height * 0.02),
-                              MaterialButton(
-                                onPressed: () {
-                                  //  if (_formKey.currentState.validate()) {
-                                  var data = {
-                                    'name': _name,
-                                    'email': _email,
-                                    'number': _phone,
-                                    'make': _make,
-                                    'model': _model,
-                                    'year': _year,
-                                    'millage': _millage,
-                                    'price': _price,
-                                    'notes': _notes
-                                  };
-                                  sellCarBloc.add(SellCarRequested(
-                                      assets: images, data: data));
-                                  //   }
-                                },
-                                height: sizeAware.height * 0.07,
-                                minWidth: sizeAware.width,
-                                shape: ContinuousRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                color: Colors.red,
-                                textColor: Colors.white,
-                                child: new Text(
-                                  "Submit Details",
-                                  style: TextStyle(fontSize: 20.0),
-                                ),
-                                splashColor: Colors.redAccent,
-                              ),
-                              SizedBox(height: sizeAware.height * 0.035),
-                            ],
-                          ),
-                        ),
+                        onPressed: calling,
                       ),
                     ),
                   ],
                 ),
-              ),
-            );
-          }
-          if (state is SellCarLoadFailure) {
-            return Scaffold(
-              backgroundColor: Colors.black,
-              appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    size: 45,
+                drawer: Container(
+                  width: sizeAware.width,
+                  child: Drawer(
+                    child: MyDrawer(),
                   ),
-                  onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
                 ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: sizeAware.width,
+                        height: sizeAware.height * 0.3,
+                        child: Image.asset(
+                          'assets/images/cover2.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Sell Your Car',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: sizeAware.width * 0.05,
+                              fontFamily: 'Gentium'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: sizeAware.height * 0.006,
+                          width: sizeAware.width * 0.3,
+                          color: Colors.red,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "We are also the perfect place to sell your car and welcome your enquiry. You can be assured of premium service and that your sale is in the very best hands." +
+                              "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
+                              "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: sizeAware.width * 0.04,
+                              fontFamily: 'Gentium'),
+                        ),
+                      ),
+                      Container(
+                        color: Color.fromRGBO(48, 52, 56, 1.0),
+                        width: sizeAware.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                Center(
+                                  child: Text(
+                                    'Submit your car details',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontFamily: 'Gentium'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                InkWell(
+                                  onTap: loadAssets,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.add_circle,
+                                        color: Colors.red,
+                                      ),
+                                      SizedBox(
+                                        width: sizeAware.width * 0.02,
+                                      ),
+                                      Text(
+                                        'Add Car images',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontFamily: 'Gentium'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: images.length == 0 ? false : true,
+                                  child: Container(
+                                    height: sizeAware.height * 0.3,
+                                    child: MySlider(images: images),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                Text(
+                                  'Full Name*',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a name' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _name = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Phone Number',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a number' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _phone = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Email Adress*',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter an email' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _email = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Make',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter make' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _make = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Car Model',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter model' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _model = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Year',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a year' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _year = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Milage',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter millage' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _millage = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Price',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a price' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _price = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Notes',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  height: sizeAware.height * 0.12,
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    expands: true,
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: null,
+                                    decoration: inputDecoration,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _notes = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(height: sizeAware.height * 0.02),
+                                MaterialButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState.validate()) {
+                                      var data = {
+                                        'name': _name,
+                                        'email': _email,
+                                        'number': _phone,
+                                        'make': _make,
+                                        'model': _model,
+                                        'year': _year,
+                                        'millage': _millage,
+                                        'price': _price,
+                                        'notes': _notes
+                                      };
+                                      sellCarBloc.add(SellCarRequested(
+                                          assets: images, data: data));
+                                    }
+                                  },
+                                  height: sizeAware.height * 0.07,
+                                  minWidth: sizeAware.width,
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  color: Colors.red,
+                                  textColor: Colors.white,
+                                  child: new Text(
+                                    "Submit Details",
+                                    style: TextStyle(fontSize: 20.0),
+                                  ),
+                                  splashColor: Colors.redAccent,
+                                ),
+                                SizedBox(height: sizeAware.height * 0.035),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+            if (state is SellCarLoadFailure) {
+              return Scaffold(
+                key: _scaffoldKeyy,
                 backgroundColor: Colors.black,
-                centerTitle: true,
-                title: Image.asset(
-                  'assets/images/black_logo.png',
-                  fit: BoxFit.cover,
-                  width: 130,
-                  //height: sizeAware.height * 0.01,
-                ),
-                actions: <Widget>[
-                  IconButton(
+                appBar: AppBar(
+                  leading: IconButton(
                     icon: Icon(
-                      Icons.call,
-                      size: 40,
+                      Icons.menu,
+                      size: 45,
                     ),
-                    onPressed: calling,
+                    onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
                   ),
-                ],
-              ),
-              drawer: Drawer(
-                child: MyDrawer(),
-              ),
-              body: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: sizeAware.width,
-                      height: sizeAware.height * 0.3,
-                      child: Image.asset(
-                        'assets/images/cover2.jpg',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+                  backgroundColor: Colors.black,
+                  centerTitle: true,
+                  title: Image.asset(
+                    'assets/images/black_logo.png',
+                    fit: BoxFit.cover,
+                    width: 130,
+                    //height: sizeAware.height * 0.01,
+                  ),
+                  actions: <Widget>[
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        'Sell Your Car',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: sizeAware.width * 0.05,
+                      padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.call,
+                          size: 40,
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        height: sizeAware.height * 0.006,
-                        width: sizeAware.width * 0.3,
-                        color: Colors.red,
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        "We are also the perfect place to sell your car and welcome your enquiry. You can be assured of premium service and that your sale is in the very best hands." +
-                            "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
-                            "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: sizeAware.width * 0.04,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      color: Color.fromRGBO(48, 52, 56, 1.0),
-                      width: sizeAware.width,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Form(
-                          key: _formKey,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              Center(
-                                child: Text(
-                                  'Submit your car details',
-                                  style: TextStyle(color: Colors.red),
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              InkWell(
-                                onTap: loadAssets,
-                                child: Row(
-                                  children: <Widget>[
-                                    Icon(
-                                      Icons.add_circle,
-                                      color: Colors.red,
-                                    ),
-                                    SizedBox(
-                                      width: sizeAware.width * 0.02,
-                                    ),
-                                    Text(
-                                      'Add Car images',
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Visibility(
-                                visible: images.length == 0 ? false : true,
-                                child: Container(
-                                  height: sizeAware.height * 0.3,
-                                  child: MySlider(images: images),
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.02,
-                              ),
-                              Text(
-                                'Full Name*',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a name' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _name = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Phone Number',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a number' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _phone = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Email Adress*',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter an email' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _email = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Make',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter make' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _make = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Car Model',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter model' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _model = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Year',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a year' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _year = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Milage',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter millage' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _millage = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Price',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                width: sizeAware.width,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(30),
-                                  ),
-                                ),
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  decoration: inputDecoration,
-                                  validator: (val) =>
-                                      val.isEmpty ? 'Enter a price' : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _price = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.025,
-                              ),
-                              Text(
-                                'Notes',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                height: sizeAware.height * 0.015,
-                              ),
-                              Container(
-                                height: sizeAware.height * 0.12,
-                                child: TextFormField(
-                                  style: TextStyle(color: Colors.white),
-                                  cursorColor: Colors.red,
-                                  expands: true,
-                                  keyboardType: TextInputType.multiline,
-                                  maxLines: null,
-                                  decoration: inputDecoration,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _notes = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: sizeAware.height * 0.02),
-                              MaterialButton(
-                                onPressed: () {
-                                  //  if (_formKey.currentState.validate()) {
-                                  var data = {
-                                    'name': _name,
-                                    'email': _email,
-                                    'number': _phone,
-                                    'make': _make,
-                                    'model': _model,
-                                    'year': _year,
-                                    'millage': _millage,
-                                    'price': _price,
-                                    'notes': _notes
-                                  };
-                                  sellCarBloc.add(SellCarRequested(
-                                      assets: images, data: data));
-                                  //   }
-                                },
-                                height: sizeAware.height * 0.07,
-                                minWidth: sizeAware.width,
-                                shape: ContinuousRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                color: Colors.red,
-                                textColor: Colors.white,
-                                child: new Text(
-                                  "Submit Details",
-                                  style: TextStyle(fontSize: 20.0),
-                                ),
-                                splashColor: Colors.redAccent,
-                              ),
-                              SizedBox(height: sizeAware.height * 0.035),
-                            ],
-                          ),
-                        ),
+                        onPressed: calling,
                       ),
                     ),
                   ],
                 ),
-              ),
-            );
-          }
-        });
+                drawer: Container(
+                  width: sizeAware.width,
+                  child: Drawer(
+                    child: MyDrawer(),
+                  ),
+                ),
+                body: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: sizeAware.width,
+                        height: sizeAware.height * 0.3,
+                        child: Image.asset(
+                          'assets/images/cover2.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'Sell Your Car',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: sizeAware.width * 0.05,
+                              fontFamily: 'Gentium'),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          height: sizeAware.height * 0.006,
+                          width: sizeAware.width * 0.3,
+                          color: Colors.red,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "We are also the perfect place to sell your car and welcome your enquiry. You can be assured of premium service and that your sale is in the very best hands." +
+                              "There are four ways we can assist in selling your car: \n• Sell for cash \n• Part Exchange \n• Selling a Forward Order \n• By Brokerage (we sell your car for a percentage of the agreed sale price)" +
+                              "\nPlease fill in the contact form below, or call us for an informal chat to check out your sale options.",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: sizeAware.width * 0.04,
+                              fontFamily: 'Gentium'),
+                        ),
+                      ),
+                      Container(
+                        color: Color.fromRGBO(48, 52, 56, 1.0),
+                        width: sizeAware.width,
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Form(
+                            key: _formKey,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                Center(
+                                  child: Text(
+                                    'Submit your car details',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontFamily: 'Gentium'),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                InkWell(
+                                  onTap: loadAssets,
+                                  child: Row(
+                                    children: <Widget>[
+                                      Icon(
+                                        Icons.add_circle,
+                                        color: Colors.red,
+                                      ),
+                                      SizedBox(
+                                        width: sizeAware.width * 0.02,
+                                      ),
+                                      Text(
+                                        'Add Car images',
+                                        style: TextStyle(
+                                            color: Colors.red,
+                                            fontFamily: 'Gentium'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Visibility(
+                                  visible: images.length == 0 ? false : true,
+                                  child: Container(
+                                    height: sizeAware.height * 0.3,
+                                    child: MySlider(images: images),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.02,
+                                ),
+                                Text(
+                                  'Full Name*',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a name' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _name = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Phone Number',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a number' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _phone = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Email Adress*',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter an email' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _email = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Make',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter make' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _make = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Car Model',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter model' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _model = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Year',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a year' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _year = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Milage',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter millage' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _millage = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Price',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  width: sizeAware.width,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(30),
+                                    ),
+                                  ),
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    decoration: inputDecoration,
+                                    validator: (val) =>
+                                        val.isEmpty ? 'Enter a price' : null,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _price = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.025,
+                                ),
+                                Text(
+                                  'Notes',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Gentium'),
+                                ),
+                                SizedBox(
+                                  height: sizeAware.height * 0.015,
+                                ),
+                                Container(
+                                  height: sizeAware.height * 0.12,
+                                  child: TextFormField(
+                                    style: TextStyle(color: Colors.white),
+                                    cursorColor: Colors.red,
+                                    expands: true,
+                                    keyboardType: TextInputType.multiline,
+                                    maxLines: null,
+                                    decoration: inputDecoration,
+                                    onChanged: (val) {
+                                      setState(() {
+                                        _notes = val;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                SizedBox(height: sizeAware.height * 0.02),
+                                MaterialButton(
+                                  onPressed: () {
+                                    if (_formKey.currentState.validate()) {
+                                      var data = {
+                                        'name': _name,
+                                        'email': _email,
+                                        'number': _phone,
+                                        'make': _make,
+                                        'model': _model,
+                                        'year': _year,
+                                        'millage': _millage,
+                                        'price': _price,
+                                        'notes': _notes
+                                      };
+                                      sellCarBloc.add(SellCarRequested(
+                                          assets: images, data: data));
+                                    }
+                                  },
+                                  height: sizeAware.height * 0.07,
+                                  minWidth: sizeAware.width,
+                                  shape: ContinuousRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  color: Colors.red,
+                                  textColor: Colors.white,
+                                  child: new Text(
+                                    "Submit Details",
+                                    style: TextStyle(fontSize: 20.0),
+                                  ),
+                                  splashColor: Colors.redAccent,
+                                ),
+                                SizedBox(height: sizeAware.height * 0.035),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
+          }),
+    );
   }
 }
