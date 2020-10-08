@@ -8,6 +8,7 @@ import 'package:alainclass/blocs/sell_car/sell_car_state.dart';
 import 'package:alainclass/repositories/sell_car/sell_car_api.dart';
 import 'package:alainclass/repositories/sell_car/sell_car_repository.dart';
 import 'package:alainclass/screens/view_car/image_slider.dart';
+import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -618,9 +619,7 @@ class _SellCarState extends State<SellCar> {
               );
             }
             if (state is SellCarLoadInProgress) {
-              return Center(
-                child: CircularProgressIndicator(),
-              );
+              return Loading();
             }
             if (state is SellCarFinished) {
               images = [];

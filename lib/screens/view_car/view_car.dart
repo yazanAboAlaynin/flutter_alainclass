@@ -3,6 +3,7 @@ import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/screens/view_car/image_slider.dart';
 import 'package:alainclass/shared/footer.dart';
+import 'package:alainclass/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -100,7 +101,7 @@ class _ViewCarState extends State<ViewCar> {
             carBloc.add(CarRequested(id: widget.car.id));
           }
           if (state is CarLoadInProgress) {
-            return Center(child: CircularProgressIndicator());
+            return Loading();
           }
 
           if (state is CarLoadSuccess || state is ImagesLoadInProgress) {

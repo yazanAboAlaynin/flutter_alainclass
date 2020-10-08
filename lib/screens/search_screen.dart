@@ -2,6 +2,7 @@ import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/shared/car_card.dart';
+import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:auto_animated/auto_animated.dart';
 import 'package:flutter/material.dart';
@@ -106,7 +107,7 @@ class _SearchScreenState extends State<SearchScreen> {
               year: widget.year));
         }
         if (state is HomeLoadInProgress) {
-          return Center(child: CircularProgressIndicator());
+          return Loading();
         }
         if (state is SearchLoadSuccess) {
           search_res = state.cars;

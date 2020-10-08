@@ -1,6 +1,7 @@
 import 'package:alainclass/blocs/notification/notification_bloc.dart';
 import 'package:alainclass/blocs/notification/notification_event.dart';
 import 'package:alainclass/blocs/notification/notification_state.dart';
+import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:alainclass/models/notification.dart' as noti;
@@ -46,7 +47,7 @@ class _NotificationsState extends State<Notifications> {
             return Container();
           }
           if (state is NotificationLoadInProgress) {
-            return Center(child: CircularProgressIndicator());
+            return Loading();
           }
           if (state is NotificationLoadSuccess) {
             notifications = state.notifications;
@@ -88,15 +89,21 @@ class _NotificationsState extends State<Notifications> {
                   child: MyDrawer(),
                 ),
               ),
-              body: Container(
-                child: CustomScrollView(slivers: [
-                  SliverList(
-                    delegate: SliverChildListDelegate(
-                      getList(notifications),
+              body: notifications.length == 0
+                  ? Center(
+                      child: Text(
+                      'No notifications yet',
+                      style: TextStyle(color: Colors.white, fontSize: 25),
+                    ))
+                  : Container(
+                      child: CustomScrollView(slivers: [
+                        SliverList(
+                          delegate: SliverChildListDelegate(
+                            getList(notifications),
+                          ),
+                        ),
+                      ]),
                     ),
-                  ),
-                ]),
-              ),
             );
           }
           if (state is NotificationLoadFailure) {

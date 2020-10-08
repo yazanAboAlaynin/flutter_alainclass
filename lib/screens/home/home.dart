@@ -3,19 +3,16 @@ import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/screens/home/image_carusel.dart';
 import 'package:alainclass/screens/news/all_news.dart';
-import 'package:alainclass/screens/sell_car/sell_car.dart';
-import 'package:alainclass/shared/car_card.dart';
+
 import 'package:alainclass/shared/footer.dart';
+import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
-import 'package:alainclass/shared/news_card.dart';
 import 'package:alainclass/shared/show_cars.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
-import 'package:alainclass/main.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -115,7 +112,7 @@ class _HomeState extends State<Home> {
           homeBloc.add(HomeRequested());
         }
         if (state is HomeLoadInProgress) {
-          return Center(child: CircularProgressIndicator());
+          return Loading();
         }
         if (state is SearchLoadSuccess) {
           new_arrivals = state.cars;

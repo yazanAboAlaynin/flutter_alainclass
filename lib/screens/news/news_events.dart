@@ -4,6 +4,7 @@ import 'package:alainclass/repositories/repositories.dart';
 import 'package:alainclass/screens/news/all_news.dart';
 import 'package:alainclass/screens/news/event_card.dart';
 import 'package:alainclass/shared/footer.dart';
+import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -55,7 +56,7 @@ class _NewsEventsState extends State<NewsEvents> {
             newsBloc.add(NewsRequested());
           }
           if (state is NewsLoadInProgress) {
-            return Center(child: CircularProgressIndicator());
+            return Loading();
           }
           if (state is NewsLoadSuccess) {
             news = state.news;

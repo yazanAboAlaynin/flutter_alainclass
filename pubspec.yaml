@@ -40,6 +40,7 @@ dependencies:
   onesignal_flutter: ^2.6.1
   auto_animated: any
   shared_preferences: ^0.5.12
+  flutter_spinkit: "^4.1.2"
   
 dev_dependencies:
   flutter_test:
