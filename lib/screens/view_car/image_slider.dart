@@ -1,4 +1,5 @@
 import 'package:alainclass/screens/view_car/open_image.dart';
+import 'package:cached_network_image_builder/cached_network_image_builder.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
 import 'package:flutter/material.dart';
@@ -31,13 +32,21 @@ class ManuallyControlledSlider extends StatelessWidget {
               child: Container(
                 margin: EdgeInsets.all(4.0),
                 child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                    child: Image.network(
-                      'https://www.alainclass.com/' + item,
-                      fit: BoxFit.cover,
-                      width: sizeAware.width,
-                      height: sizeAware.height,
-                    )),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: CachedNetworkImageBuilder(
+                    url: 'https://www.alainclass.com/' + item,
+                    builder: (image) {
+                      return Center(
+                          child: Image.file(
+                        image,
+                        fit: BoxFit.cover,
+                        width: sizeAware.width,
+                        height: sizeAware.height,
+                      ));
+                    },
+                    placeHolder: Center(child: CircularProgressIndicator()),
+                  ),
+                ),
               ),
             ))
         .toList();
