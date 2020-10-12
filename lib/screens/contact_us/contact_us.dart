@@ -1,9 +1,25 @@
+import 'package:alainclass/repositories/shared_pref.dart';
+import 'package:alainclass/screens/notifications/notifications.dart';
 import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class ContactUs extends StatelessWidget {
+class ContactUs extends StatefulWidget {
+  @override
+  _ContactUsState createState() => _ContactUsState();
+}
+
+class _ContactUsState extends State<ContactUs> {
+  int notificationsNumber = 0;
+
+  Future<int> getNotificationsNumber() async {
+    int x = await SharedPrefs.getNotificationsNumber();
+    setState(() {
+      notificationsNumber = x;
+    });
+  }
+
   calling() async {
     const url = 'tel:0097143782222';
 
@@ -24,6 +40,12 @@ class ContactUs extends StatelessWidget {
 
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
+  void initState() {
+    getNotificationsNumber();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
     return Scaffold(
@@ -33,7 +55,7 @@ class ContactUs extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.menu,
-            size: 45,
+            size: 35,
           ),
           onPressed: () => _scaffoldKey.currentState.openDrawer(),
         ),
@@ -47,11 +69,51 @@ class ContactUs extends StatelessWidget {
         ),
         actions: <Widget>[
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 4, 6, 4),
+            padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+            child: Stack(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Notifications(),
+                      ),
+                    ).then((value) => getNotificationsNumber());
+                  },
+                ),
+                notificationsNumber == 0
+                    ? Container()
+                    : Positioned(
+                        bottom: 10,
+                        right: 2,
+                        child: Container(
+                          width: 18,
+                          height: 18,
+                          decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(100)),
+                          child: Center(
+                            child: Text(
+                              '$notificationsNumber',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
             child: IconButton(
               icon: Icon(
                 Icons.call,
-                size: 40,
+                size: 30,
               ),
               onPressed: calling,
             ),

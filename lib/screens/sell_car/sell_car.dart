@@ -7,6 +7,8 @@ import 'package:alainclass/blocs/sell_car/sell_car_event.dart';
 import 'package:alainclass/blocs/sell_car/sell_car_state.dart';
 import 'package:alainclass/repositories/sell_car/sell_car_api.dart';
 import 'package:alainclass/repositories/sell_car/sell_car_repository.dart';
+import 'package:alainclass/repositories/shared_pref.dart';
+import 'package:alainclass/screens/notifications/notifications.dart';
 import 'package:alainclass/screens/view_car/image_slider.dart';
 import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
@@ -34,6 +36,15 @@ class _SellCarState extends State<SellCar> {
   String _notes = "";
   SellCarRepository sellCarRepository = SellCarRepository(api: SellCarApi());
   SellCarBloc sellCarBloc;
+  int notificationsNumber = 0;
+
+  Future<int> getNotificationsNumber() async {
+    int x = await SharedPrefs.getNotificationsNumber();
+    setState(() {
+      notificationsNumber = x;
+    });
+  }
+
   final _formKey = GlobalKey<FormState>();
   List<Asset> images = [];
   String _error = 'No Error Dectected';
@@ -42,6 +53,7 @@ class _SellCarState extends State<SellCar> {
   void initState() {
     super.initState();
     sellCarBloc = SellCarBloc(sellCarRepository: sellCarRepository);
+    getNotificationsNumber();
   }
 
   calling() async {
@@ -167,7 +179,7 @@ class _SellCarState extends State<SellCar> {
                   leading: IconButton(
                     icon: Icon(
                       Icons.menu,
-                      size: 45,
+                      size: 35,
                     ),
                     onPressed: () => _scaffoldKeyy.currentState.openDrawer(),
                   ),
@@ -182,10 +194,51 @@ class _SellCarState extends State<SellCar> {
                   actions: <Widget>[
                     Padding(
                       padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+                      child: Stack(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.notifications,
+                              size: 30,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Notifications(),
+                                ),
+                              ).then((value) => getNotificationsNumber());
+                            },
+                          ),
+                          notificationsNumber == 0
+                              ? Container()
+                              : Positioned(
+                                  bottom: 10,
+                                  right: 2,
+                                  child: Container(
+                                    width: 18,
+                                    height: 18,
+                                    decoration: BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: Center(
+                                      child: Text(
+                                        '$notificationsNumber',
+                                        style: TextStyle(fontSize: 12),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
                       child: IconButton(
                         icon: Icon(
                           Icons.call,
-                          size: 40,
+                          size: 30,
                         ),
                         onPressed: calling,
                       ),

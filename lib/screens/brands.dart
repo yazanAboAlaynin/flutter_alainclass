@@ -1,13 +1,23 @@
+import 'package:alainclass/repositories/shared_pref.dart';
 import 'package:alainclass/screens/search_screen.dart';
 import 'package:alainclass/shared/my_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class Brands extends StatelessWidget {
+import 'notifications/notifications.dart';
+
+class Brands extends StatefulWidget {
   final Map brands;
 
   Brands({this.brands});
+
+  @override
+  _BrandsState createState() => _BrandsState();
+}
+
+class _BrandsState extends State<Brands> {
   final _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   calling() async {
     print('here');
     const url = 'tel:0097143782222';
@@ -19,17 +29,33 @@ class Brands extends StatelessWidget {
     }
   }
 
+  int notificationsNumber = 0;
+
+  Future<int> getNotificationsNumber() async {
+    int x = await SharedPrefs.getNotificationsNumber();
+    setState(() {
+      notificationsNumber = x;
+    });
+  }
+
+  @override
+  void initState() {
+    getNotificationsNumber();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     final sizeAware = MediaQuery.of(context).size;
     List<Widget> list = [];
-    var sortedKeys = brands.keys.toList()..sort();
+    var sortedKeys = widget.brands.keys.toList()..sort();
     int c = "A".codeUnitAt(0);
     int end = "Z".codeUnitAt(0);
     while (c <= end) {
       List<Widget> brds = [];
-      for (int i = 0; i < brands.length; i++) {
-        if (brands[sortedKeys[i]].substring(0, 1) == String.fromCharCode(c)) {
+      for (int i = 0; i < widget.brands.length; i++) {
+        if (widget.brands[sortedKeys[i]].substring(0, 1) ==
+            String.fromCharCode(c)) {
           brds.add(InkWell(
             onTap: () {
               Navigator.push(
@@ -44,7 +70,7 @@ class Brands extends StatelessWidget {
             },
             child: Container(
               child: Text(
-                brands[sortedKeys[i]],
+                widget.brands[sortedKeys[i]],
                 style: TextStyle(color: Colors.white, fontFamily: 'Gentium'),
               ),
             ),
@@ -92,7 +118,7 @@ class Brands extends StatelessWidget {
         leading: IconButton(
           icon: Icon(
             Icons.menu,
-            size: sizeAware.width * 0.1,
+            size: 35,
           ),
           onPressed: () => _scaffoldKey.currentState.openDrawer(),
         ),
@@ -107,10 +133,50 @@ class Brands extends StatelessWidget {
         actions: <Widget>[
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+            child: Stack(
+              children: [
+                IconButton(
+                  icon: Icon(
+                    Icons.notifications,
+                    size: 30,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Notifications(),
+                      ),
+                    ).then((value) => getNotificationsNumber());
+                  },
+                ),
+                notificationsNumber == 0
+                    ? Container()
+                    : Positioned(
+                        bottom: 10,
+                        right: 2,
+                        child: Container(
+                          width: 18,
+                          height: 18,
+                          decoration: BoxDecoration(
+                              color: Colors.red,
+                              borderRadius: BorderRadius.circular(100)),
+                          child: Center(
+                            child: Text(
+                              '$notificationsNumber',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ),
+                        ),
+                      ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
             child: IconButton(
               icon: Icon(
                 Icons.call,
-                size: 40,
+                size: 30,
               ),
               onPressed: calling,
             ),

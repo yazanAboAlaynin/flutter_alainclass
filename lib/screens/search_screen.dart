@@ -1,6 +1,7 @@
 import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
+import 'package:alainclass/repositories/shared_pref.dart';
 import 'package:alainclass/shared/car_card.dart';
 import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
@@ -9,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:url_launcher/url_launcher.dart';
+
+import 'notifications/notifications.dart';
 
 class SearchScreen extends StatefulWidget {
   final String brand;
@@ -23,6 +26,15 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  int notificationsNumber = 0;
+
+  Future<int> getNotificationsNumber() async {
+    int x = await SharedPrefs.getNotificationsNumber();
+    setState(() {
+      notificationsNumber = x;
+    });
+  }
+
   calling() async {
     print('here');
     const url = 'tel:0097143782222';
@@ -89,6 +101,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   void initState() {
     super.initState();
+    getNotificationsNumber();
     homeBloc = HomeBloc(homeRepository: homeRepository);
   }
 
@@ -118,7 +131,7 @@ class _SearchScreenState extends State<SearchScreen> {
               leading: IconButton(
                 icon: Icon(
                   Icons.menu,
-                  size: 45,
+                  size: 35,
                 ),
                 onPressed: () => _scaffoldKey.currentState.openDrawer(),
               ),
@@ -133,10 +146,50 @@ class _SearchScreenState extends State<SearchScreen> {
               actions: <Widget>[
                 Padding(
                   padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+                  child: Stack(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Icons.notifications,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Notifications(),
+                            ),
+                          ).then((value) => getNotificationsNumber());
+                        },
+                      ),
+                      notificationsNumber == 0
+                          ? Container()
+                          : Positioned(
+                              bottom: 10,
+                              right: 2,
+                              child: Container(
+                                width: 18,
+                                height: 18,
+                                decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    borderRadius: BorderRadius.circular(100)),
+                                child: Center(
+                                  child: Text(
+                                    '$notificationsNumber',
+                                    style: TextStyle(fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
                   child: IconButton(
                     icon: Icon(
                       Icons.call,
-                      size: 40,
+                      size: 30,
                     ),
                     onPressed: calling,
                   ),

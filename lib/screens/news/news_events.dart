@@ -1,8 +1,10 @@
 import 'package:alainclass/blocs/blocs.dart';
 import 'package:alainclass/models/models.dart';
 import 'package:alainclass/repositories/repositories.dart';
+import 'package:alainclass/repositories/shared_pref.dart';
 import 'package:alainclass/screens/news/all_news.dart';
 import 'package:alainclass/screens/news/event_card.dart';
+import 'package:alainclass/screens/notifications/notifications.dart';
 import 'package:alainclass/shared/footer.dart';
 import 'package:alainclass/shared/loading.dart';
 import 'package:alainclass/shared/my_drawer.dart';
@@ -22,6 +24,14 @@ class _NewsEventsState extends State<NewsEvents> {
       httpClient: http.Client(),
     ),
   );
+  int notificationsNumber = 0;
+
+  Future<int> getNotificationsNumber() async {
+    int x = await SharedPrefs.getNotificationsNumber();
+    setState(() {
+      notificationsNumber = x;
+    });
+  }
 
   NewsBloc newsBloc;
 
@@ -32,6 +42,7 @@ class _NewsEventsState extends State<NewsEvents> {
   @override
   void initState() {
     super.initState();
+    getNotificationsNumber();
     newsBloc = NewsBloc(newsRepository: newsRepository);
   }
 
@@ -67,7 +78,7 @@ class _NewsEventsState extends State<NewsEvents> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.menu,
-                    size: 45,
+                    size: 35,
                   ),
                   onPressed: () => _scaffoldKey.currentState.openDrawer(),
                 ),
@@ -82,10 +93,50 @@ class _NewsEventsState extends State<NewsEvents> {
                 actions: <Widget>[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
+                    child: Stack(
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            Icons.notifications,
+                            size: 30,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Notifications(),
+                              ),
+                            ).then((value) => getNotificationsNumber());
+                          },
+                        ),
+                        notificationsNumber == 0
+                            ? Container()
+                            : Positioned(
+                                bottom: 10,
+                                right: 2,
+                                child: Container(
+                                  width: 18,
+                                  height: 18,
+                                  decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: Center(
+                                    child: Text(
+                                      '$notificationsNumber',
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 2, 6, 2),
                     child: IconButton(
                       icon: Icon(
                         Icons.call,
-                        size: 40,
+                        size: 30,
                       ),
                       onPressed: calling,
                     ),

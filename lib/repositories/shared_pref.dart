@@ -19,6 +19,47 @@ class SharedPrefs {
     return notifications;
   }
 
+  static Future<int> getNotificationsNumber() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    if (!localStorage.containsKey('notifications')) {
+      return 0;
+    }
+    var notis = jsonDecode(localStorage.get('notifications')) as List;
+
+    List<noti.Notification> notifications =
+        notis.map((e) => noti.Notification.fromSp(e)).toList();
+
+    int cnt = 0;
+
+    for (int i = 0; i < notifications.length; i++) {
+      if (!notifications[i].status) {
+        cnt++;
+      }
+    }
+    return cnt;
+  }
+
+  static Future readAll() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    if (!localStorage.containsKey('notifications')) {
+      return;
+    }
+    var notis = jsonDecode(localStorage.get('notifications')) as List;
+
+    List<noti.Notification> notifications =
+        notis.map((e) => noti.Notification.fromSp(e)).toList();
+
+    for (int i = 0; i < notifications.length; i++) {
+      if (!notifications[i].status) {
+        notifications[i].status = true;
+      }
+    }
+    List<Map> list = noti.Notification.encodeNotifications(notifications);
+
+    localStorage.setString('notifications', jsonEncode(list));
+    return;
+  }
+
   static Future saveNotification(noti.Notification notification) async {
     SharedPreferences localStorage = await SharedPreferences.getInstance();
     if (!localStorage.containsKey('notifications')) {
@@ -30,7 +71,6 @@ class SharedPrefs {
     List<noti.Notification> notifications =
         notis.map((e) => noti.Notification.fromSp(e)).toList();
     notifications.add(notification);
-    print(notifications);
     List<Map> list = noti.Notification.encodeNotifications(notifications);
 
     localStorage.setString('notifications', jsonEncode(list));

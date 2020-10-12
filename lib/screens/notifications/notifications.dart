@@ -58,7 +58,7 @@ class _NotificationsState extends State<Notifications> {
                 leading: IconButton(
                   icon: Icon(
                     Icons.menu,
-                    size: 45,
+                    size: 35,
                   ),
                   onPressed: () => _scaffoldKey.currentState.openDrawer(),
                 ),
@@ -76,7 +76,7 @@ class _NotificationsState extends State<Notifications> {
                     child: IconButton(
                       icon: Icon(
                         Icons.call,
-                        size: 40,
+                        size: 30,
                       ),
                       onPressed: calling,
                     ),

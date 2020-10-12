@@ -40,8 +40,8 @@ dependencies:
   onesignal_flutter: ^2.6.1
   auto_animated: any
   shared_preferences: ^0.5.12
-  flutter_spinkit: "^4.1.2"
   cached_network_image_builder: ^0.1.0
+  lottie: ^0.6.0
   
 dev_dependencies:
   flutter_test:

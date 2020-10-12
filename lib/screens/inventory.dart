@@ -36,7 +36,7 @@ class ChooseType extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 Icons.call,
-                size: 40,
+                size: 30,
               ),
               onPressed: calling,
             ),

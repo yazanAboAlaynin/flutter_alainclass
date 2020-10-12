@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:lottie/lottie.dart';
 
 class Loading extends StatelessWidget {
   @override
@@ -13,17 +13,14 @@ class Loading extends StatelessWidget {
                 image: AssetImage("assets/images/loading.png"),
                 fit: BoxFit.cover)),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(
-              height: sizeAware.height * 0.6,
+              height: sizeAware.height * 0.3,
             ),
             Center(
-              child: SpinKitHourGlass(
-                color: Colors.white,
-                size: 50.0,
-              ),
-            ),
+                // child: Lottie.asset('assets/test2.json'),
+                ),
           ],
         ),
       ),

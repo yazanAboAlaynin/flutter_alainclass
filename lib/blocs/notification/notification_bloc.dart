@@ -16,6 +16,7 @@ class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
     if (event is NotificationRequested) {
       yield NotificationLoadInProgress();
       try {
+        await SharedPrefs.readAll();
         List<noti.Notification> notifications =
             await SharedPrefs.getNotifications();
         notifications = List.from(notifications.reversed);
