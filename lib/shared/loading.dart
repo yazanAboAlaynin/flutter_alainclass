@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class Loading extends StatelessWidget {
   @override
@@ -19,8 +19,11 @@ class Loading extends StatelessWidget {
               height: sizeAware.height * 0.3,
             ),
             Center(
-                // child: Lottie.asset('assets/test2.json'),
-                ),
+              child: SpinKitCircle(
+                color: Colors.white,
+                size: 60.0,
+              ),
+            ),
           ],
         ),
       ),
